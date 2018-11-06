@@ -1,0 +1,4 @@
+#Tue Nov 06 09:36:27 GMT 2018
+base.0=/home/alex/project-322/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
