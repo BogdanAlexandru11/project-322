@@ -102,13 +102,13 @@ export class HomePage {
             }
         }
         if (10 === num) {
-            this.myVar = this.myVar + 'oct ';
+            // this.myVar = this.myVar + 'oct ';
         }
         if (11 === num) {
-            this.myVar = this.myVar + 'rest ';
+            // this.myVar = this.myVar + 'rest ';
         }
         if (12 === num) {
-            this.myVar = this.myVar + '# ';
+            // this.myVar = this.myVar + '# ';
         }
     }
 
