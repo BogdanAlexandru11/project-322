@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-// import { ToneJs } from 'tone';
 import * as tone from 'tone';
 
 
@@ -9,80 +8,57 @@ import * as tone from 'tone';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-    public buttons: Array<string>;
-    // public myVar: string;
-    // myVar: string;
-    public counter = 1;
-    public lastTapTime = 0;
     public myVar = '';
-    public delay = 500;
-    private timeoutDuration = 500;
-    private myStr = '';
-    // public myVar: string;
-
-    // static myEvent(event) {
-    //   console.log(event);
-    // }
-
-    constructor() {
-        // this.buttons = ['1', '2/abc', '3/def', '4/ghi', '5/jkl', '6/mno', '7/pqrs', '8/tuv', '9/wxyz', '*/+', '0/_', '#/UP'];
-    }
+    constructor() {}
     buttonClicked(num) {
         const test = new tone.Synth().toMaster();
-        // // const boppen = new ToneJs.Synth().toMaster();
-        // // // var synth = new Tone.Synth().toMaster();
-        test.triggerAttackRelease('C4', '8n');
-        // const context = new AudioContext();
-        // const o = context.createOscillator();
-        // o.type = 'sine';
-        // o.connect(context.destination);
-        // o.start();
-        //
-        // const interval = window.setInterval(() => {
-        //     o.stop();
-        //     window.clearInterval(interval);
-        // }, 3000);
-
         if (1 === num) {
-            this.myVar = this.myVar + 'c';
+            test.triggerAttackRelease('C#1', '4n');
+            this.myVar = this.myVar + '4c1 ';
         }
         if (2 === num) {
-            this.myVar = this.myVar + 'd';
+            test.triggerAttackRelease('D#1', '4n');
+            this.myVar = this.myVar + '4d1 ';
         }
         if (3 === num) {
-            this.myVar = this.myVar + 'e';
+            test.triggerAttackRelease('E#1', '4n');
+            this.myVar = this.myVar + '4e1 ';
         }
         if (4 === num) {
-            this.myVar = this.myVar + 'f';
+            test.triggerAttackRelease('F#1', '4n');
+            this.myVar = this.myVar + '4f1 ';
         }
         if (5 === num) {
-            this.myVar = this.myVar + 'g';
+            test.triggerAttackRelease('G#1', '4n');
+            this.myVar = this.myVar + '4g1 ';
         }
         if (6 === num) {
-            this.myVar = this.myVar + 'a';
+            test.triggerAttackRelease('F#1', '4n');
+            this.myVar = this.myVar + '4a1 ';
         }
         if (7 === num) {
-            this.myVar = this.myVar + 'b';
+            test.triggerAttackRelease('B#1', '4n');
+            this.myVar = this.myVar + '4b1 ';
         }
         if (8 === num) {
-            this.myVar = this.myVar + '-';
+            this.myVar = this.myVar + '- ';
         }
         if (9 === num) {
-            this.myVar = this.myVar + '+';
+            this.myVar = this.myVar + '+ ';
         }
         if (10 === num) {
-            this.myVar = this.myVar + 'oct';
+            this.myVar = this.myVar + 'oct ';
         }
         if (11 === num) {
-            this.myVar = this.myVar + 'rest';
+            this.myVar = this.myVar + 'rest ';
         }
         if (12 === num) {
-            this.myVar = this.myVar + '#';
+            this.myVar = this.myVar + '# ';
         }
     }
 
     reset() {
-    this.myVar = '';
+        this.myVar = '';
     }
 }
 
