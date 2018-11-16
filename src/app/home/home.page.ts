@@ -13,6 +13,7 @@ export class HomePage {
     public myVar = '';
     public hashtagPresent = false;
     public duration = 4;
+    public seq;
     constructor() {}
     buttonClicked(num) {
         const test = new tone.Synth().toMaster();
@@ -213,26 +214,24 @@ export class HomePage {
                 this.myVar = this.myVar.substr(0, myIndex) + ' ';
             }
         }
+
     play() {
-        const playThis = new tone.Synth().toMaster();
-        // // var synth = new Tone.FMSynth().toMaster()
-        //
-        // const myArray = this.myVar.substring(0, this.myVar.length - 1).split(' ');
-        // for ( let i = 0; i < myArray.length; i++){
-        //     console.log(myArray[i]);
-        //     const match = /[a-zA-Z]/.exec(myArray[i]);
-        //     if (match) {
-        //         const this.duration = parseInt(myArray[i].substr(0, match.index));
-        //         // this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + lastInstructions.substr(match.index) + ' ';
-        //         // playThis.triggerAttackRelease(myArray[i].substring(match.index, match.index + 1) + '#1', this.duration + 'n', tone.Time('4n') + tone.Time('8n'));
-        //     }
-        // }
+        const synth = new tone.Synth().toMaster();
 
-        const part = new tone.Part(function(time, value){
-            playThis.triggerAttackRelease(value.note, '8n', time, value.velocity);
-        }, [{'time' : 0, 'note' : 'C3', 'velocity': 0.9},
-            {'time' : '0:2', 'note' : 'C4', 'velocity': 0.5}
-        ]).start(0);
+        this.seq = new tone.Sequence(function(time, note) {
+            console.log(time);
+            console.log(note);
+            synth.triggerAttackRelease(note, '4n');
+        }, ['C4', ['E4', 'D4', 'E4'], 'G4', ['A4', 'G4']]);
 
+        this.seq.start();
+        tone.Transport.start('+0.1');
+
+
+    }
+
+    stop() {
+        this.seq = this.seq.dispose();
+        tone.Transport.stop();
     }
 }
