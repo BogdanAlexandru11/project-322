@@ -13,6 +13,7 @@
   <!--<textarea rows="1" cols="40">-->
   <!--{{ myVar }}-->
   <!--</textarea>-->
+
   <!-- DAILY CSS IMAGES 31 - NOKIA 3310-->
   <div class="nokia">
     <div class="body"></div>
@@ -44,4 +45,38 @@
       <button class="keys n0"></button>
     </div>
   </div>
+
+  <td><p>current octave: {{octave}}</p></td>
+  <br>
+  <td><button type="button" (click)="reset()">reset<br></button></td>
+  <td><button type="button" (click)="deleteLast()">deleteLast<br></button></td>
+  <td><button type="button" (click)="play()">play<br></button></td>
+
+
+  <br>
+  <table>
+    <tbody>
+    <tr>
+      <td><button type="button" (click)="buttonClicked(1)">1<br>c</button></td>
+      <td><button type="button" (click)="buttonClicked(2)">2<br>d</button></td>
+      <td><button type="button" (click)="buttonClicked(3)">3<br>e</button></td>
+    </tr>
+    <tr>
+      <td><button type="button" (click)="buttonClicked(4)">4<br>f</button></td>
+      <td><button type="button" (click)="buttonClicked(5)">5<br>g</button></td>
+      <td><button type="button" (click)="buttonClicked(6)">6<br>a</button></td>
+    </tr>
+    <tr>
+      <td><button type="button" (click)="buttonClicked(7)">7<br>b</button></td>
+      <td><button type="button" (click)="buttonClicked(8)">8<br>-</button></td>
+      <td><button type="button" (click)="buttonClicked(9)">9<br>+</button></td>
+    </tr>
+    <tr>
+      <td><button type="button" (click)="buttonClicked(10)">*<br>oct</button></td>
+      <td><button type="button" (click)="buttonClicked(11)">0<br>rest</button></td>
+      <td><button type="button" (click)="buttonClicked(12)">#<br>#</button></td>
+    </tr>
+    </tbody>
+  </table>
+
 </ion-content>
