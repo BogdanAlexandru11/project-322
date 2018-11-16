@@ -9,37 +9,38 @@ import {last} from 'rxjs/operators';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+    public octave = 1;
     public myVar = '';
     constructor() {}
     buttonClicked(num) {
         const test = new tone.Synth().toMaster();
         if (1 === num) {
-            test.triggerAttackRelease('C#1', '4n');
-            this.myVar = this.myVar + '4c1 ';
+            test.triggerAttackRelease('C#' + this.octave, '4n');
+            this.myVar = this.myVar + '4c' + this.octave + ' ';
         }
         if (2 === num) {
-            test.triggerAttackRelease('D#1', '4n');
-            this.myVar = this.myVar + '16d1 ';
+            test.triggerAttackRelease('D#' + this.octave, '4n');
+            this.myVar = this.myVar + '4d' + this.octave + ' ';
         }
         if (3 === num) {
-            test.triggerAttackRelease('E#1', '4n');
-            this.myVar = this.myVar + '32e1 ';
+            test.triggerAttackRelease('E#' + this.octave, '4n');
+            this.myVar = this.myVar + '4e' + this.octave + ' ';
         }
         if (4 === num) {
-            test.triggerAttackRelease('F#1', '4n');
-            this.myVar = this.myVar + '4f1 ';
+            test.triggerAttackRelease('F#' + this.octave, '4n');
+            this.myVar = this.myVar + '4f' + this.octave + ' ';
         }
         if (5 === num) {
-            test.triggerAttackRelease('G#1', '4n');
-            this.myVar = this.myVar + '4g1 ';
+            test.triggerAttackRelease('G#' + this.octave, '4n');
+            this.myVar = this.myVar + '4g' + this.octave + ' ';
         }
         if (6 === num) {
-            test.triggerAttackRelease('F#1', '4n');
-            this.myVar = this.myVar + '4a1 ';
+            test.triggerAttackRelease('F#'  + this.octave, '4n');
+            this.myVar = this.myVar + '4a' + this.octave + ' ';
         }
         if (7 === num) {
-            test.triggerAttackRelease('B#1', '4n');
-            this.myVar = this.myVar + '4b1 ';
+            test.triggerAttackRelease('B#'  + this.octave, '4n');
+            this.myVar = this.myVar + '4b' + this.octave + ' ';
         }
         if (8 === num) {
             const myIndex = this.myVar.substr(0, this.myVar.length - 1).lastIndexOf(' ');
@@ -102,7 +103,10 @@ export class HomePage {
             }
         }
         if (10 === num) {
-            // this.myVar = this.myVar + 'oct ';
+            this.octave = this.octave + 1;
+            if (this.octave > 8 ) {
+                this.octave = 1;
+            }
         }
         if (11 === num) {
             // this.myVar = this.myVar + 'rest ';
