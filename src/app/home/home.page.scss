@@ -403,54 +403,7 @@ html {
   //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
   transform: rotate(35deg);
 }
-.n123::before {
-  @extend %extend_3;
-  left: -44px;
-  //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
-  transform: rotate(15deg);
-}
-.n123::after {
-  @extend %extend_3;
-  right: -44px;
-  //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
-  transform: rotate(-15deg);
-}
-.n456::before {
-  @extend %extend_3;
-  left: -44px;
-  //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
-  transform: rotate(15deg);
-}
-.n456::after {
-  @extend %extend_3;
-  right: -44px;
-  //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
-  transform: rotate(-15deg);
-}
-.n789::before {
-  @extend %extend_3;
-  left: -44px;
-  //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
-  transform: rotate(15deg);
-}
-.n789::after {
-  @extend %extend_3;
-  right: -44px;
-  //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
-  transform: rotate(-15deg);
-}
-.n0::before {
-  @extend %extend_3;
-  left: -44px;
-  //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
-  transform: rotate(15deg);
-}
-.n0::after {
-  @extend %extend_3;
-  right: -44px;
-  //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
-  transform: rotate(-15deg);
-}
+
 .keys {
   position: absolute;
   left: calc((100% - 32px)/2);
@@ -461,17 +414,70 @@ html {
   //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
   border-radius: 50%/50%;
 }
-.n123 {
+
+.n1{
+  left: -25px;
+  transform: rotate(15deg);
+  top: 52px;
+
+}
+.n2 {
   top: 52px;
 }
-.n456 {
+
+.n3{
+  left: 70px;
+  transform: rotate(-15deg);
+  top:52px;
+}
+
+.n4{
+  left: -25px;
+  transform: rotate(15deg);
+  top: 78px;
+
+}
+.n5 {
   top: 78px;
 }
-.n789 {
+
+.n6{
+  left: 70px;
+  transform: rotate(-15deg);
+  top:78px;
+}
+
+.n7{
+  left: -25px;
+  transform: rotate(15deg);
   top: 103px;
+
+}
+.n8 {
+  top: 103px;
+}
+
+.n9{
+  left: 70px;
+  transform: rotate(-15deg);
+  top:103px;
+}
+
+.nStar{
+  left: -25px;
+  transform: rotate(15deg);
+  top: 128px;
+
 }
 .n0 {
   top: 128px;
+}
+
+.nHash{
+  left: 70px;
+  transform: rotate(-15deg);
+  top: 128px;
+
 }
 .frame {
   position: absolute;
