@@ -55,8 +55,13 @@ export class HomePage {
                     if (this.duration > 32) {
                        this.duration = 32;
                     }
-                    this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + myString.substr(match.index) + ' ';
-                    test.triggerAttackRelease(myString.substring(match.index, match.index + 1)  + this.octave, this.duration + 'n');
+                    if (myString.match(/#/)) {
+                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + '#' + myString.substr(match.index) + ' ';
+                        test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
+                    } else {
+                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + myString.substr(match.index) + ' ';
+                        test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
+                    }
                 }
             } else {
                 const lastInstructions = this.myVar.substr(myIndex).trim();
@@ -97,8 +102,13 @@ export class HomePage {
                     if (this.duration < 2) {
                         this.duration = 1;
                     }
-                    this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + myString.substr(match.index) + ' ';
-                    test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
+                    if (myString.match(/#/)) {
+                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + '#' + myString.substr(match.index) + ' ';
+                        test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
+                    } else {
+                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + myString.substr(match.index) + ' ';
+                        test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
+                    }
                 }
             } else {
                 const lastInstructions = this.myVar.substr(myIndex).trim();
