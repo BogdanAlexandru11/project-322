@@ -50,39 +50,39 @@ export class HomePage {
                 const myString = this.myVar.substr(0, this.myVar.length - 1);
                 const match = /[a-zA-Z]/.exec(myString);
                 if (match) {
-                    let duration = parseInt(myString.substr(0, match.index), 10);
-                    duration = duration * 2;
-                    if (duration > 32) {
-                       duration = 32;
+                    this.duration = parseInt(myString.substr(0, match.index), 10);
+                    this.duration = this.duration * 2;
+                    if (this.duration > 32) {
+                       this.duration = 32;
                     }
-                    console.log(myString);
-                    this.myVar = this.myVar.substr(0, myIndex) + ' ' + duration + myString.substr(match.index) + ' ';
-                    test.triggerAttackRelease(myString.substring(match.index, match.index + 1)  + this.octave, duration + 'n');
+                    this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + myString.substr(match.index) + ' ';
+                    test.triggerAttackRelease(myString.substring(match.index, match.index + 1)  + this.octave, this.duration + 'n');
                 }
-                console.log(this.myVar.substr(0, this.myVar.length - 1));
             } else {
                 const lastInstructions = this.myVar.substr(myIndex).trim();
                 const match = /[a-zA-Z]/.exec(lastInstructions);
                 const matchPause = /[-]/.exec(lastInstructions);
                 if (match) {
-                    let duration = parseInt(lastInstructions.substr(0, match.index), 10);
-                    duration = duration * 2;
-                    if (duration > 32) {
-                        duration = 32;
+                    this.duration = parseInt(lastInstructions.substr(0, match.index), 10);
+                    this.duration = this.duration * 2;
+                    if (this.duration > 32) {
+                        this.duration = 32;
                     }
-                    console.log(lastInstructions);
-                    console.log('*********');
-                    console.log(duration + '#' + lastInstructions.substr(match.index) + ' ');
-                    this.myVar = this.myVar.substr(0, myIndex) + ' ' + duration + lastInstructions.substr(match.index) + ' ';
-                    test.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + this.octave, duration + 'n');
+                    if (lastInstructions.match(/#/)) {
+                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + '#' + lastInstructions.substr(match.index) + ' ';
+                        test.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
+                    } else {
+                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + lastInstructions.substr(match.index) + ' ';
+                        test.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
+                    }
                 }
                 if (matchPause) {
-                    let duration = parseInt(lastInstructions.substr(0, matchPause.index), 10);
-                    duration = duration * 2;
-                    if (duration > 32) {
-                        duration = 32;
+                    this.duration = parseInt(lastInstructions.substr(0, matchPause.index), 10);
+                    this.duration = this.duration * 2;
+                    if (this.duration > 32) {
+                        this.duration = 32;
                     }
-                    this.myVar = this.myVar.substring(0, myIndex) + ' ' + duration + '- ';
+                    this.myVar = this.myVar.substring(0, myIndex) + ' ' + this.duration + '- ';
                 }
             }
         }
@@ -92,37 +92,39 @@ export class HomePage {
                 const myString = this.myVar.substr(0, this.myVar.length - 1);
                 const match = /[a-zA-Z]/.exec(myString);
                 if (match) {
-                    let duration = parseInt(myString.substr(0, match.index), 10);
-                    console.log(duration);
-                    duration = duration / 2;
-                    if (duration < 2) {
-                        duration = 1;
+                    this.duration = parseInt(myString.substr(0, match.index), 10);
+                    this.duration = this.duration / 2;
+                    if (this.duration < 2) {
+                        this.duration = 1;
                     }
-                    this.myVar = this.myVar.substr(0, myIndex) + ' ' + duration + myString.substr(match.index) + ' ';
-                    test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + this.octave, duration + 'n');
+                    this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + myString.substr(match.index) + ' ';
+                    test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
                 }
-                console.log(this.myVar.substr(0, this.myVar.length - 1));
             } else {
                 const lastInstructions = this.myVar.substr(myIndex).trim();
                 const match = /[a-zA-Z]/.exec(lastInstructions);
                 const matchPause = /[-]/.exec(lastInstructions);
                 if (match) {
-                    let duration = parseInt(lastInstructions.substr(0, match.index), 10);
-                    duration = duration / 2;
-                    if (duration < 2) {
-                        duration = 1;
+                    this.duration = parseInt(lastInstructions.substr(0, match.index), 10);
+                    this.duration = this.duration / 2;
+                    if (this.duration < 2) {
+                        this.duration = 1;
                     }
-                    this.myVar = this.myVar.substr(0, myIndex) + ' ' + duration + lastInstructions.substr(match.index) + ' ';
-                    console.log(lastInstructions.substring(match.index, match.index + 1));
-                    test.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + this.octave, duration + 'n');
+                    if (lastInstructions.match(/#/)) {
+                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + '#' + lastInstructions.substr(match.index) + ' ';
+                        test.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
+                    } else {
+                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + lastInstructions.substr(match.index) + ' ';
+                        test.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
+                    }
                 }
                 if (matchPause) {
-                    let duration = parseInt(lastInstructions.substr(0, matchPause.index), 10);
-                    duration = duration / 2;
-                    if (duration < 2) {
-                        duration = 1;
+                    this.duration = parseInt(lastInstructions.substr(0, matchPause.index), 10);
+                    this.duration = this.duration / 2;
+                    if (this.duration < 2) {
+                        this.duration = 1;
                     }
-                    this.myVar = this.myVar.substring(0, myIndex) + ' ' + duration + '- ';
+                    this.myVar = this.myVar.substring(0, myIndex) + ' ' + this.duration + '- ';
                 }
             }
         }
@@ -133,7 +135,6 @@ export class HomePage {
             }
         }
         if (11 === num) {
-            console.log('rest function');
             this.myVar = this.myVar + '4- ';
         }
 
@@ -146,9 +147,9 @@ export class HomePage {
                         const myString = this.myVar.substr(0, this.myVar.length - 1);
                         const match = /[a-zA-Z]/.exec(myString);
                         if (match) {
-                            const duration = parseInt(this.myVar.substr(0, this.myVar.length - 1).substr(0, match.index), 10);
+                            this.duration = parseInt(this.myVar.substr(0, this.myVar.length - 1).substr(0, match.index), 10);
                             this.myVar = this.myVar.substr(0, match.index) + '#' + this.myVar.substring(match.index);
-                            test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + '#' + this.octave, duration + 'n');
+                            test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
                         }
                     } else {
                         const myString = this.myVar.substr(0, this.myVar.length - 1);
@@ -156,10 +157,9 @@ export class HomePage {
                         const matchHashtag = /#/.exec(myString);
                         if (match) {
                             if (matchHashtag) {
-                                console.log(myString);
-                                const duration = parseInt(this.myVar.substr(0, this.myVar.length - 1).substr(0, match.index), 10);
-                                this.myVar = duration + myString.substring(0, matchHashtag.index - 1) + myString.substring(matchHashtag.index + 1) + ' ';
-                                test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + this.octave, duration + 'n');
+                                this.duration = parseInt(this.myVar.substr(0, this.myVar.length - 1).substr(0, match.index), 10);
+                                this.myVar = this.duration + myString.substring(0, matchHashtag.index - 1) + myString.substring(matchHashtag.index + 1) + ' ';
+                                test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
                                 this.hashtagPresent = false;
                             }
                         }
@@ -173,40 +173,20 @@ export class HomePage {
                     this.hashtagPresent = true;
                 }
                 if (this.hashtagPresent === false) {
-                    const myString = this.myVar.substr(0, this.myVar.length - 1);
-                    // add here the hashtag
-                    console.log(lastInstructions);
                     if (match) {
-                        // add the hashtag
-                        this.duration = parseInt(this.myVar.substr(0, this.myVar.length - 1).substr(0, match.index), 10);
+                        this.duration = parseInt(lastInstructions.substring(0, lastInstructions.length - 1).substr(0, match.index), 10);
                         this.myVar = this.myVar.substr(0, myIndex) + ' ' + (this.duration + '#' + lastInstructions.substr(match.index) + ' ');
-                        test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
+                        test.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
                     }
                 }
-                if (this.hashtagPresent === true){
+                if (this.hashtagPresent === true) {
                     if (match) {
-                        // add the hashtag
-                        this.duration = parseInt(this.myVar.substr(0, this.myVar.length - 1).substr(0, match.index), 10);
+                        this.duration = parseInt(lastInstructions.substring(0, lastInstructions.length - 1).substr(0, match.index), 10);
                         this.myVar = this.myVar.substr(0, myIndex) + ' ' + (this.duration + lastInstructions.substr(match.index) + ' ');
                         test.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
                         this.hashtagPresent = false;
                     }
                 }
-                // const lastInstructions = this.myVar.substr(myIndex).trim();
-                // const match = /[a-zA-Z]/.exec(lastInstructions);
-                // const matchPause = /[-]/.exec(lastInstructions);
-                // if (match) {
-                //     let duration = parseInt(lastInstructions.substr(0, match.index), 10);
-                //     duration = duration / 2;
-                //     if (duration < 2) {
-                //         duration = 1;
-                //     }
-                //     this.myVar = this.myVar.substr(0, myIndex) + ' ' + duration + lastInstructions.substr(match.index) + ' ';
-                //     console.log(lastInstructions.substring(match.index, match.index + 1));
-                //     test.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + this.octave, duration + 'n');
-                // }
-                //
-
             }
         }
     }
@@ -227,15 +207,14 @@ export class HomePage {
         const playThis = new tone.Synth().toMaster();
         // // var synth = new Tone.FMSynth().toMaster()
         //
-        // console.log('play');
         // const myArray = this.myVar.substring(0, this.myVar.length - 1).split(' ');
         // for ( let i = 0; i < myArray.length; i++){
         //     console.log(myArray[i]);
         //     const match = /[a-zA-Z]/.exec(myArray[i]);
         //     if (match) {
-        //         const duration = parseInt(myArray[i].substr(0, match.index));
-        //         // this.myVar = this.myVar.substr(0, myIndex) + ' ' + duration + lastInstructions.substr(match.index) + ' ';
-        //         // playThis.triggerAttackRelease(myArray[i].substring(match.index, match.index + 1) + '#1', duration + 'n', tone.Time('4n') + tone.Time('8n'));
+        //         const this.duration = parseInt(myArray[i].substr(0, match.index));
+        //         // this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + lastInstructions.substr(match.index) + ' ';
+        //         // playThis.triggerAttackRelease(myArray[i].substring(match.index, match.index + 1) + '#1', this.duration + 'n', tone.Time('4n') + tone.Time('8n'));
         //     }
         // }
 
@@ -247,6 +226,3 @@ export class HomePage {
 
     }
 }
-
-
-
