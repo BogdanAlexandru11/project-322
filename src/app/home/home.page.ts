@@ -9,41 +9,42 @@ import {last} from 'rxjs/operators';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-    public octave = 1;
+    public octave = 4;
     public myVar = '';
     public hashtagPresent = false;
     public duration = 4;
+    public frontEndOctave = 1;
     public seq;
     constructor() {}
     buttonClicked(num) {
         const test = new tone.Synth().toMaster();
         if (1 === num) {
             test.triggerAttackRelease('C' + this.octave, '4n');
-            this.myVar = this.myVar + '4c' + this.octave + ' ';
+            this.myVar = this.myVar + '4c' + this.frontEndOctave + ' ';
         }
         if (2 === num) {
             test.triggerAttackRelease('D' + this.octave, '4n');
-            this.myVar = this.myVar + '4d' + this.octave + ' ';
+            this.myVar = this.myVar + '4d' + this.frontEndOctave + ' ';
         }
         if (3 === num) {
             test.triggerAttackRelease('E' + this.octave, '4n');
-            this.myVar = this.myVar + '4e' + this.octave + ' ';
+            this.myVar = this.myVar + '4e' + this.frontEndOctave + ' ';
         }
         if (4 === num) {
             test.triggerAttackRelease('F' + this.octave, '4n');
-            this.myVar = this.myVar + '4f' + this.octave + ' ';
+            this.myVar = this.myVar + '4f' + this.frontEndOctave + ' ';
         }
         if (5 === num) {
             test.triggerAttackRelease('G' + this.octave, '4n');
-            this.myVar = this.myVar + '4g' + this.octave + ' ';
+            this.myVar = this.myVar + '4g' + this.frontEndOctave + ' ';
         }
         if (6 === num) {
             test.triggerAttackRelease('F'  + this.octave, '4n');
-            this.myVar = this.myVar + '4a' + this.octave + ' ';
+            this.myVar = this.myVar + '4a' + this.frontEndOctave + ' ';
         }
         if (7 === num) {
             test.triggerAttackRelease('B'  + this.octave, '4n');
-            this.myVar = this.myVar + '4b' + this.octave + ' ';
+            this.myVar = this.myVar + '4b' + this.frontEndOctave + ' ';
         }
         if (8 === num) {
             const myIndex = this.myVar.substr(0, this.myVar.length - 1).lastIndexOf(' ');
@@ -140,9 +141,13 @@ export class HomePage {
             }
         }
         if (10 === num) {
+            this.frontEndOctave = this.frontEndOctave + 1;
+            if (this.frontEndOctave > 3) {
+                this.frontEndOctave = 1;
+            }
             this.octave = this.octave + 1;
-            if (this.octave > 8 ) {
-                this.octave = 1;
+            if (this.octave > 6 ) {
+                this.octave = 4;
             }
         }
         if (11 === num) {
@@ -224,13 +229,21 @@ export class HomePage {
             const match = /[a-zA-Z]/.exec(note);
             const matchHashTag = /#/.exec(note);
             const matchPause = /-/.exec(note);
+            let octaveValue;
             if (match) {
+                octaveValue = parseInt(note.substring(match.index + 1), 10);
+                if (octaveValue === 1) {
+                    note = note.substring(0, match.index + 1) + 4;
+                } else if (octaveValue === 2) {
+                    note = note.substring(0, match.index + 1) + 5;
+                } else if (octaveValue === 3) {
+                    note = note.substring(0, match.index + 1) + 6;
+                }
                 noteLength = parseInt(note.substr(0, match.index), 10);
                 noteValue = note.substr(match.index);
                 if (matchHashTag) {
                     noteValue = noteValue.substring(0, 1) + '#' + noteValue.substring(1);
                 }
-                console.log(noteValue);
                 synth.triggerAttackRelease(noteValue, noteLength + 'n');
             }
             if (matchPause) {
@@ -240,6 +253,7 @@ export class HomePage {
         }, notesArray);
         this.seq.start();
         this.seq.loop = 0;
+        // tone.Transport.bpm.rampTo(200);
         tone.Transport.start('+0.1');
     }
 
