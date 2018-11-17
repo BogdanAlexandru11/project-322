@@ -217,17 +217,30 @@ export class HomePage {
 
     play() {
         const synth = new tone.Synth().toMaster();
-
+        const notesArray = this.myVar.split(' ');
         this.seq = new tone.Sequence(function(time, note) {
-            console.log(time);
-            console.log(note);
-            synth.triggerAttackRelease(note, '4n');
-        }, ['C4', ['E4', 'D4', 'E4'], 'G4', ['A4', 'G4']]);
-
+            let noteLength;
+            let noteValue;
+            const match = /[a-zA-Z]/.exec(note);
+            const matchHashTag = /#/.exec(note);
+            const matchPause = /-/.exec(note);
+            if (match) {
+                noteLength = parseInt(note.substr(0, match.index), 10);
+                noteValue = note.substr(match.index);
+                if (matchHashTag) {
+                    noteValue = noteValue.substring(0, 1) + '#' + noteValue.substring(1);
+                }
+                console.log(noteValue);
+                synth.triggerAttackRelease(noteValue, noteLength + 'n');
+            }
+            if (matchPause) {
+                noteLength = parseInt(note.substr(0, matchPause.index), 10);
+                synth.triggerAttackRelease('', noteLength + 'n');
+            }
+        }, notesArray);
         this.seq.start();
+        this.seq.loop = 0;
         tone.Transport.start('+0.1');
-
-
     }
 
     stop() {
