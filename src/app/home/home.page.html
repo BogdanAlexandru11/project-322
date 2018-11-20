@@ -1,19 +1,48 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Nokia 3310 ringtone app
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding="true">
-  <ion-item>
-    <ion-label color="primary">{{myVar}}</ion-label>
-  </ion-item>
+<ion-content>
   <!--<textarea rows="1" cols="40">-->
   <!--{{ myVar }}-->
   <!--</textarea>-->
   <td><p>current octave: {{frontEndOctave}}</p></td>
+  <p>{{myVar}}</p>
+  <!-- DAILY CSS IMAGES 31 - NOKIA 3310-->
+  <div class="nokia">
+    <div class="body"></div>
+    <div class="side"></div>
+    <div class="speaker">
+      <div class="speaker-holes"></div>
+    </div>
+    <div class="logo">
+      <p>NOKIA</p>
+    </div>
+    <div class="top"></div>
+    <div class="screen">
+      <div class="score">
+        <p>Octave: {{frontEndOctave}}</p>
+        <p class="display">{{myVar}}</p>
+      </div>
+    </div>
+    <div class="buttons">
+      <button type="button" (click)="play()"  class="home"></button>
+      <button type="button" (click)="reset()" class="call"></button>
+      <div class="select">
+        <div class="arrow"></div>
+      </div>
+      <button type="button" (click)="buttonClicked(1)" class="keys n1" >1</button>
+      <button type="button" (click)="buttonClicked(2)" class="keys n2" >2</button>
+      <button type="button" (click)="buttonClicked(3)" class="keys n3" >3</button>
+      <button type="button" (click)="buttonClicked(4)" class="keys n4" >4</button>
+      <button type="button" (click)="buttonClicked(5)" class="keys n5" >5</button>
+      <button type="button" (click)="buttonClicked(6)" class="keys n6" >6</button>
+      <button type="button" (click)="buttonClicked(7)" class="keys n7" >7</button>
+      <button type="button" (click)="buttonClicked(8)" class="keys n8" >8</button>
+      <button type="button" (click)="buttonClicked(9)" class="keys n9" >9</button>
+      <button type="button" (click)="buttonClicked(10)" class="keys nStar" >*</button>
+      <button type="button" (click)="buttonClicked(11)" class="keys n0" >0</button>
+      <button type="button" (click)="buttonClicked(12)" class="keys nHash" >#</button>
+    </div>
+  </div>
+
+
   <br>
   <td><button type="button" (click)="reset()">reset<br></button></td>
   <td><button type="button" (click)="deleteLast()">deleteLast<br></button></td>
