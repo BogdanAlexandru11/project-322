@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import * as tone from 'tone';
-import {last} from 'rxjs/operators';
+// @ViewChild('play') play;
 
 
 @Component({
@@ -150,6 +150,11 @@ export class HomePage {
             {'time' : '0:2', 'note' : 'C4', 'velocity': 0.5}
         ]).start(0);
 
+    }
+
+    guns() {
+        this.myVar = '8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1 8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1';
+        document.getElementById('play').click();
     }
 }
 
