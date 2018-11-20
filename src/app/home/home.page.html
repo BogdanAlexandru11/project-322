@@ -47,8 +47,11 @@
     </tbody>
   </table>
 
-
-    <td><button type="button" (click)="guns()">Guns 'N Roses: Paradise City<br></button></td>
+  <ul>
+    <button *ngFor="let button of buttons; let i = index;" (click)="guns($event,button)">
+      {{ i + 1 }} - {{ button }}
+    </button>
+  </ul>
 
 
 

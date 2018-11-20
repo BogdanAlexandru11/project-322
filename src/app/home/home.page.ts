@@ -9,13 +9,23 @@ import * as tone from 'tone';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+    public buttons: Array<string>;
     public octave = 4;
     public myVar = '';
     public hashtagPresent = false;
     public duration = 4;
     public frontEndOctave = 1;
     public seq;
-    constructor() {}
+    constructor() {
+        this.buttons = ['Eminem: Without Me', 'Guns N Roses: Paradise City', 'X-Files', 'Abba: Mamma Mia', 'Barbie girl'];
+    }
+    public songs = {
+      paradiseCity : '8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1 8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1',
+      withoutMe : '8d2 8#a2 8a2 8g2 4d2 4- 8d2 8c2 8d2 8f2 8d2 8- 4- 8d2 8c2 8d2 8c2 8#a1 8- 4- 8#a1 8a1 8f1 4g1 4- 8- 8d2 8#a2 8a2 8g2 8d2 8- 4- 8d2 8c2 8d2 8f2 4d2 4- 8d2 8c2 8d2 8c2 8#a1 8- 4- 8#a1 8a1 8f1 8g1',
+      xfiles : '4e1 4b1 4a1 4b1 4d2 2b1 1- 4e1 4b1 4a1 4b1 4e2 2b1 1- 4g2 4#f2 4e2 4d2 4e2 2b1 1- 4g2 4#f2 4e2 4d2 4#f2 2b1 1- 4e1 4b1 4a1 4b1 4d2 2b1 1- 4e1 4b1 4a1 4b1 4e2 2b1 1- 4e2 2b1',
+      mammamia : '32f2 32#d2 32f2 8#d2 32#d2 32#d2 32f2 32g2 32f2 16.#d2 32- 16f2 8#d2 16#g2 32#g2 32#g2 32#g2 16g2 16.#d2 32- 8#a2 32#a2 32#a2 16#a2 16f2 16g2 8#g2 16g2 16g2 32g2 16g2 16d2 16#d2 8f2 16f2 8#d2 16#g2 32#g2 32#g2 32#g2 32g2 32#d2 32f2 16#d2',
+      barbiegirl : '8#g2 8e2 8#g2 8#c3 4a2 4- 8#f2 8#d2 8#f2 8b2 4#g2 8#f2 8e2 4- 8e2 8#c2 4#f2 4#c2 4- 8#f2 8e2 4#g2 4#f2'
+    };
     buttonClicked(num) {
         const test = new tone.Synth().toMaster();
         if (1 === num) {
@@ -253,7 +263,7 @@ export class HomePage {
         }, notesArray);
         this.seq.start();
         this.seq.loop = 0;
-        // tone.Transport.bpm.rampTo(200);
+        // tone.Transport.bpm.rampTo(125);
         tone.Transport.start('+0.1');
     }
 
@@ -262,8 +272,26 @@ export class HomePage {
         tone.Transport.stop();
     }
 
-    guns() {
-        this.myVar = '8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1 8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1';
+    guns(event, button) {
+        // document.getElementById('stop').click();
+        if (button.match(/Eminem/)) {
+            this.myVar = this.songs.withoutMe;
+        }
+        if (button.match(/Guns/)) {
+            this.myVar = this.songs.paradiseCity;
+        }
+        if (button.match(/X-Files/)) {
+            this.myVar = this.songs.xfiles;
+        }
+        if (button.match(/Mamma/)) {
+            this.myVar = this.songs.mammamia;
+        }
+        if(button.match(/Barbie/)) {
+            this.myVar = this.songs.barbiegirl;
+        }
+        console.log(event);
+        console.log(button);
+        // this.myVar = '8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1 8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1';
         document.getElementById('play').click();
     }
 }
