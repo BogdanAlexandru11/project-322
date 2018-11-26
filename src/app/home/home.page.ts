@@ -1,5 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import * as tone from 'tone';
+import { NouisliderModule } from 'ng2-nouislider';
+// import '~nouislider/distribute/nouislider.min.css';
+
 // @ViewChild('play') play;
 
 
@@ -11,7 +14,7 @@ import * as tone from 'tone';
 export class HomePage {
     public buttons: Array<string>;
     public octave = 4;
-    public myVar = '';
+    public inputBox = '';
     public hashtagPresent = false;
     public duration = 4;
     public frontEndOctave = 1;
@@ -19,47 +22,75 @@ export class HomePage {
     constructor() {
         this.buttons = ['Eminem: Without Me', 'Guns N Roses: Paradise City', 'X-Files', 'Abba: Mamma Mia', 'Barbie girl'];
     }
+
     public songs = {
-      paradiseCity : '8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1 8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1',
-      withoutMe : '8d2 8#a2 8a2 8g2 4d2 4- 8d2 8c2 8d2 8f2 8d2 8- 4- 8d2 8c2 8d2 8c2 8#a1 8- 4- 8#a1 8a1 8f1 4g1 4- 8- 8d2 8#a2 8a2 8g2 8d2 8- 4- 8d2 8c2 8d2 8f2 4d2 4- 8d2 8c2 8d2 8c2 8#a1 8- 4- 8#a1 8a1 8f1 8g1',
-      xfiles : '4e1 4b1 4a1 4b1 4d2 2b1 1- 4e1 4b1 4a1 4b1 4e2 2b1 1- 4g2 4#f2 4e2 4d2 4e2 2b1 1- 4g2 4#f2 4e2 4d2 4#f2 2b1 1- 4e1 4b1 4a1 4b1 4d2 2b1 1- 4e1 4b1 4a1 4b1 4e2 2b1 1- 4e2 2b1',
-      mammamia : '32f2 32#d2 32f2 8#d2 32#d2 32#d2 32f2 32g2 32f2 16.#d2 32- 16f2 8#d2 16#g2 32#g2 32#g2 32#g2 16g2 16.#d2 32- 8#a2 32#a2 32#a2 16#a2 16f2 16g2 8#g2 16g2 16g2 32g2 16g2 16d2 16#d2 8f2 16f2 8#d2 16#g2 32#g2 32#g2 32#g2 32g2 32#d2 32f2 16#d2',
-      barbiegirl : '8#g2 8e2 8#g2 8#c3 4a2 4- 8#f2 8#d2 8#f2 8b2 4#g2 8#f2 8e2 4- 8e2 8#c2 4#f2 4#c2 4- 8#f2 8e2 4#g2 4#f2'
+        paradise : {
+            notes: '8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1 8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1',
+            tempo: 225
+        },
+        without : {
+            notes : '8d2 8#a2 8a2 8g2 4d2 4- 8d2 8c2 8d2 8f2 8d2 8- 4- 8d2 8c2 8d2 8c2 8#a1 8- 4- 8#a1 8a1 8f1 4g1 4- 8- 8d2 8#a2 8a2 8g2 8d2 8- 4- 8d2 8c2 8d2 8f2 4d2 4- 8d2 8c2 8d2 8c2 8#a1 8- 4- 8#a1 8a1 8f1 8g1',
+            tempo : 112
+      },
+      files : {
+          notes : '4e1 4b1 4a1 4b1 4d2 2b1 1- 4e1 4b1 4a1 4b1 4e2 2b1 1- 4g2 4#f2 4e2 4d2 4e2 2b1 1- 4g2 4#f2 4e2 4d2 4#f2 2b1 1- 4e1 4b1 4a1 4b1 4d2 2b1 1- 4e1 4b1 4a1 4b1 4e2 2b1 1- 4e2 2b1',
+          tempo : 125
+      },
+      mamma : {
+            notes : '32f2 32#d2 32f2 8#d2 32#d2 32#d2 32f2 32g2 32f2 16.#d2 32- 16f2 8#d2 16#g2 32#g2 32#g2 32#g2 16g2 16.#d2 32- 8#a2 32#a2 32#a2 16#a2 16f2 16g2 8#g2 16g2 16g2 32g2 16g2 16d2 16#d2 8f2 16f2 8#d2 16#g2 32#g2 32#g2 32#g2 32g2 32#d2 32f2 16#d2',
+          tempo : 125
+      },
+      barbie : {
+            notes : '8#g2 8e2 8#g2 8#c3 4a2 4- 8#f2 8#d2 8#f2 8b2 4#g2 8#f2 8e2 4- 8e2 8#c2 4#f2 4#c2 4- 8#f2 8e2 4#g2 4#f2',
+            tempo : 125
+      }
     };
+
+
     buttonClicked(num) {
-        const test = new tone.Synth().toMaster();
+        const buttonsSynth = new tone.Synth({
+            frequency: 100,
+            envelope: {
+                attack: 0.01,
+                decay: 0.1,
+                release: 0.01
+            },
+            harmonicity: 1.0,
+            modulationIndex: 10,
+            volume: -10
+        }).toMaster();
         if (1 === num) {
-            test.triggerAttackRelease('C' + this.octave, '4n');
-            this.myVar = this.myVar + '4c' + this.frontEndOctave + ' ';
+            buttonsSynth.triggerAttackRelease('C' + this.octave, '4n');
+            this.inputBox = this.inputBox + '4c' + this.frontEndOctave + ' ';
         }
         if (2 === num) {
-            test.triggerAttackRelease('D' + this.octave, '4n');
-            this.myVar = this.myVar + '4d' + this.frontEndOctave + ' ';
+            buttonsSynth.triggerAttackRelease('D' + this.octave, '4n');
+            this.inputBox = this.inputBox + '4d' + this.frontEndOctave + ' ';
         }
         if (3 === num) {
-            test.triggerAttackRelease('E' + this.octave, '4n');
-            this.myVar = this.myVar + '4e' + this.frontEndOctave + ' ';
+            buttonsSynth.triggerAttackRelease('E' + this.octave, '4n');
+            this.inputBox = this.inputBox + '4e' + this.frontEndOctave + ' ';
         }
         if (4 === num) {
-            test.triggerAttackRelease('F' + this.octave, '4n');
-            this.myVar = this.myVar + '4f' + this.frontEndOctave + ' ';
+            buttonsSynth.triggerAttackRelease('F' + this.octave, '4n');
+            this.inputBox = this.inputBox + '4f' + this.frontEndOctave + ' ';
         }
         if (5 === num) {
-            test.triggerAttackRelease('G' + this.octave, '4n');
-            this.myVar = this.myVar + '4g' + this.frontEndOctave + ' ';
+            buttonsSynth.triggerAttackRelease('G' + this.octave, '4n');
+            this.inputBox = this.inputBox + '4g' + this.frontEndOctave + ' ';
         }
         if (6 === num) {
-            test.triggerAttackRelease('F'  + this.octave, '4n');
-            this.myVar = this.myVar + '4a' + this.frontEndOctave + ' ';
+            buttonsSynth.triggerAttackRelease('F'  + this.octave, '4n');
+            this.inputBox = this.inputBox + '4a' + this.frontEndOctave + ' ';
         }
         if (7 === num) {
-            test.triggerAttackRelease('B'  + this.octave, '4n');
-            this.myVar = this.myVar + '4b' + this.frontEndOctave + ' ';
+            buttonsSynth.triggerAttackRelease('B'  + this.octave, '4n');
+            this.inputBox = this.inputBox + '4b' + this.frontEndOctave + ' ';
         }
         if (8 === num) {
-            const myIndex = this.myVar.substr(0, this.myVar.length - 1).lastIndexOf(' ');
-            if (this.myVar.length <= 5) {
-                const myString = this.myVar.substr(0, this.myVar.length - 1);
+            const myIndex = this.inputBox.substr(0, this.inputBox.length - 1).lastIndexOf(' ');
+            if (this.inputBox.length <= 5) {
+                const myString = this.inputBox.substr(0, this.inputBox.length - 1);
                 const match = /[a-zA-Z]/.exec(myString);
                 if (match) {
                     this.duration = parseInt(myString.substr(0, match.index), 10);
@@ -68,15 +99,15 @@ export class HomePage {
                        this.duration = 32;
                     }
                     if (myString.match(/#/)) {
-                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + '#' + myString.substr(match.index) + ' ';
-                        test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
+                        this.inputBox = this.inputBox.substr(0, myIndex) + ' ' + this.duration + '#' + myString.substr(match.index) + ' ';
+                        buttonsSynth.triggerAttackRelease(myString.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
                     } else {
-                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + myString.substr(match.index) + ' ';
-                        test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
+                        this.inputBox = this.inputBox.substr(0, myIndex) + ' ' + this.duration + myString.substr(match.index) + ' ';
+                        buttonsSynth.triggerAttackRelease(myString.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
                     }
                 }
             } else {
-                const lastInstructions = this.myVar.substr(myIndex).trim();
+                const lastInstructions = this.inputBox.substr(myIndex).trim();
                 const match = /[a-zA-Z]/.exec(lastInstructions);
                 const matchPause = /[-]/.exec(lastInstructions);
                 if (match) {
@@ -86,11 +117,11 @@ export class HomePage {
                         this.duration = 32;
                     }
                     if (lastInstructions.match(/#/)) {
-                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + '#' + lastInstructions.substr(match.index) + ' ';
-                        test.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
+                        this.inputBox = this.inputBox.substr(0, myIndex) + ' ' + this.duration + '#' + lastInstructions.substr(match.index) + ' ';
+                        buttonsSynth.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
                     } else {
-                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + lastInstructions.substr(match.index) + ' ';
-                        test.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
+                        this.inputBox = this.inputBox.substr(0, myIndex) + ' ' + this.duration + lastInstructions.substr(match.index) + ' ';
+                        buttonsSynth.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
                     }
                 }
                 if (matchPause) {
@@ -99,14 +130,14 @@ export class HomePage {
                     if (this.duration > 32) {
                         this.duration = 32;
                     }
-                    this.myVar = this.myVar.substring(0, myIndex) + ' ' + this.duration + '- ';
+                    this.inputBox = this.inputBox.substring(0, myIndex) + ' ' + this.duration + '- ';
                 }
             }
         }
         if (9 === num) {
-            const myIndex = this.myVar.substr(0, this.myVar.length - 1).lastIndexOf(' ');
-            if (this.myVar.length <= 6) {
-                const myString = this.myVar.substr(0, this.myVar.length - 1);
+            const myIndex = this.inputBox.substr(0, this.inputBox.length - 1).lastIndexOf(' ');
+            if (this.inputBox.length <= 6) {
+                const myString = this.inputBox.substr(0, this.inputBox.length - 1);
                 const match = /[a-zA-Z]/.exec(myString);
                 if (match) {
                     this.duration = parseInt(myString.substr(0, match.index), 10);
@@ -115,15 +146,15 @@ export class HomePage {
                         this.duration = 1;
                     }
                     if (myString.match(/#/)) {
-                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + '#' + myString.substr(match.index) + ' ';
-                        test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
+                        this.inputBox = this.inputBox.substr(0, myIndex) + ' ' + this.duration + '#' + myString.substr(match.index) + ' ';
+                        buttonsSynth.triggerAttackRelease(myString.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
                     } else {
-                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + myString.substr(match.index) + ' ';
-                        test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
+                        this.inputBox = this.inputBox.substr(0, myIndex) + ' ' + this.duration + myString.substr(match.index) + ' ';
+                        buttonsSynth.triggerAttackRelease(myString.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
                     }
                 }
             } else {
-                const lastInstructions = this.myVar.substr(myIndex).trim();
+                const lastInstructions = this.inputBox.substr(myIndex).trim();
                 const match = /[a-zA-Z]/.exec(lastInstructions);
                 const matchPause = /[-]/.exec(lastInstructions);
                 if (match) {
@@ -133,11 +164,11 @@ export class HomePage {
                         this.duration = 1;
                     }
                     if (lastInstructions.match(/#/)) {
-                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + '#' + lastInstructions.substr(match.index) + ' ';
-                        test.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
+                        this.inputBox = this.inputBox.substr(0, myIndex) + ' ' + this.duration + '#' + lastInstructions.substr(match.index) + ' ';
+                        buttonsSynth.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
                     } else {
-                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + this.duration + lastInstructions.substr(match.index) + ' ';
-                        test.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
+                        this.inputBox = this.inputBox.substr(0, myIndex) + ' ' + this.duration + lastInstructions.substr(match.index) + ' ';
+                        buttonsSynth.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
                     }
                 }
                 if (matchPause) {
@@ -146,7 +177,7 @@ export class HomePage {
                     if (this.duration < 2) {
                         this.duration = 1;
                     }
-                    this.myVar = this.myVar.substring(0, myIndex) + ' ' + this.duration + '- ';
+                    this.inputBox = this.inputBox.substring(0, myIndex) + ' ' + this.duration + '- ';
                 }
             }
         }
@@ -161,38 +192,38 @@ export class HomePage {
             }
         }
         if (11 === num) {
-            this.myVar = this.myVar + '4- ';
+            this.inputBox = this.inputBox + '4- ';
         }
 
         if (12 === num) {
-            if (this.myVar.length <= 6) {
-                    if (this.myVar.match(/.*#.*$/)) {
+            if (this.inputBox.length <= 6) {
+                    if (this.inputBox.match(/.*#.*$/)) {
                         this.hashtagPresent = true;
                     }
                     if (this.hashtagPresent === false) {
-                        const myString = this.myVar.substr(0, this.myVar.length - 1);
+                        const myString = this.inputBox.substr(0, this.inputBox.length - 1);
                         const match = /[a-zA-Z]/.exec(myString);
                         if (match) {
-                            this.duration = parseInt(this.myVar.substr(0, this.myVar.length - 1).substr(0, match.index), 10);
-                            this.myVar = this.myVar.substr(0, match.index) + '#' + this.myVar.substring(match.index);
-                            test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
+                            this.duration = parseInt(this.inputBox.substr(0, this.inputBox.length - 1).substr(0, match.index), 10);
+                            this.inputBox = this.inputBox.substr(0, match.index) + '#' + this.inputBox.substring(match.index);
+                            buttonsSynth.triggerAttackRelease(myString.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
                         }
                     } else {
-                        const myString = this.myVar.substr(0, this.myVar.length - 1);
+                        const myString = this.inputBox.substr(0, this.inputBox.length - 1);
                         const match = /[a-zA-Z]/.exec(myString);
                         const matchHashtag = /#/.exec(myString);
                         if (match) {
                             if (matchHashtag) {
-                                this.duration = parseInt(this.myVar.substr(0, this.myVar.length - 1).substr(0, match.index), 10);
-                                this.myVar = this.duration + myString.substring(0, matchHashtag.index - 1) + myString.substring(matchHashtag.index + 1) + ' ';
-                                test.triggerAttackRelease(myString.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
+                                this.duration = parseInt(this.inputBox.substr(0, this.inputBox.length - 1).substr(0, match.index), 10);
+                                this.inputBox = this.duration + myString.substring(0, matchHashtag.index - 1) + myString.substring(matchHashtag.index + 1) + ' ';
+                                buttonsSynth.triggerAttackRelease(myString.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
                                 this.hashtagPresent = false;
                             }
                         }
                     }
                 } else {
-                const myIndex = this.myVar.substr(0, this.myVar.length - 1).lastIndexOf(' ');
-                const lastInstructions = this.myVar.substr(myIndex).trim();
+                const myIndex = this.inputBox.substr(0, this.inputBox.length - 1).lastIndexOf(' ');
+                const lastInstructions = this.inputBox.substr(myIndex).trim();
                 const match = /[a-zA-Z]/.exec(lastInstructions);
 
                 if (lastInstructions.match(/.*#.*$/)) {
@@ -201,15 +232,15 @@ export class HomePage {
                 if (this.hashtagPresent === false) {
                     if (match) {
                         this.duration = parseInt(lastInstructions.substring(0, lastInstructions.length - 1).substr(0, match.index), 10);
-                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + (this.duration + '#' + lastInstructions.substr(match.index) + ' ');
-                        test.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
+                        this.inputBox = this.inputBox.substr(0, myIndex) + ' ' + (this.duration + '#' + lastInstructions.substr(match.index) + ' ');
+                        buttonsSynth.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
                     }
                 }
                 if (this.hashtagPresent === true) {
                     if (match) {
                         this.duration = parseInt(lastInstructions.substring(0, lastInstructions.length - 1).substr(0, match.index), 10);
-                        this.myVar = this.myVar.substr(0, myIndex) + ' ' + (this.duration + lastInstructions.substr(match.index) + ' ');
-                        test.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
+                        this.inputBox = this.inputBox.substr(0, myIndex) + ' ' + (this.duration + lastInstructions.substr(match.index) + ' ');
+                        buttonsSynth.triggerAttackRelease(lastInstructions.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
                         this.hashtagPresent = false;
                     }
                 }
@@ -218,21 +249,34 @@ export class HomePage {
     }
 
     reset() {
-        this.myVar = '';
+        this.inputBox = '';
     }
 
     deleteLast() {
-        const myIndex = this.myVar.substr(0, this.myVar.length - 1).lastIndexOf(' ');
-        if (this.myVar.length <= 6) {
-            this.myVar = '';
+        const myIndex = this.inputBox.substr(0, this.inputBox.length - 1).lastIndexOf(' ');
+        if (this.inputBox.length <= 6) {
+            this.inputBox = '';
         } else {
-                this.myVar = this.myVar.substr(0, myIndex) + ' ';
+                this.inputBox = this.inputBox.substr(0, myIndex) + ' ';
             }
         }
 
     play() {
-        const synth = new tone.Synth().toMaster();
-        const notesArray = this.myVar.split(' ');
+        // const synth = new tone.Synth().toMaster();
+
+        const synth = new tone.Synth({
+            frequency:  200,
+            envelope: {
+                attack: 0.01,
+                decay: 0.1,
+                release: 0.01
+            },
+            harmonicity: 1.0,
+            modulationIndex: 10,
+            volume: -10
+        }).toMaster();
+
+        const notesArray = this.inputBox.split(' ');
         this.seq = new tone.Sequence(function(time, note) {
             let noteLength;
             let noteValue;
@@ -258,12 +302,13 @@ export class HomePage {
             }
             if (matchPause) {
                 noteLength = parseInt(note.substr(0, matchPause.index), 10);
-                synth.triggerAttackRelease('', noteLength + 'n');
+                // synth.volume.value = 0;
+                // synth.Zero ( );
+                // synth.triggerRelease('', noteLength + 'n');
             }
         }, notesArray);
         this.seq.start();
         this.seq.loop = 0;
-        // tone.Transport.bpm.rampTo(125);
         tone.Transport.start('+0.1');
     }
 
@@ -272,26 +317,18 @@ export class HomePage {
         tone.Transport.stop();
     }
 
-    guns(event, button) {
-        // document.getElementById('stop').click();
-        if (button.match(/Eminem/)) {
-            this.myVar = this.songs.withoutMe;
-        }
-        if (button.match(/Guns/)) {
-            this.myVar = this.songs.paradiseCity;
-        }
-        if (button.match(/X-Files/)) {
-            this.myVar = this.songs.xfiles;
-        }
-        if (button.match(/Mamma/)) {
-            this.myVar = this.songs.mammamia;
-        }
-        if(button.match(/Barbie/)) {
-            this.myVar = this.songs.barbiegirl;
-        }
-        console.log(event);
-        console.log(button);
-        // this.myVar = '8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1 8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1';
+
+
+    songsList(event, button) {
+        document.getElementById('stop').click();
+        this.inputBox = '';
+            for (const value of Object.keys(this.songs)) {
+                    if (button.toLowerCase().includes(value)) {
+                        tone.Transport.bpm.rampTo(this.songs[value].tempo);
+                        this.inputBox = this.songs[value].notes;
+                    }
+            }
         document.getElementById('play').click();
     }
 }
+
