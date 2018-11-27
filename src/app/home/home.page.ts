@@ -1,8 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import * as tone from 'tone';
-import { NouisliderModule } from 'ng2-nouislider';
-// import '~nouislider/distribute/nouislider.min.css';
-
+import { Options } from 'ng5-slider';
+import { FormControl } from '@angular/forms';
 // @ViewChild('play') play;
 
 
@@ -12,6 +11,15 @@ import { NouisliderModule } from 'ng2-nouislider';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+    // public value = 100;
+    // sliderControl: FormControl = new FormControl(100);
+    public value = 100;
+    options: Options = {
+        floor: 0,
+        ceil: 300
+    };
+
+
     public buttons: Array<string>;
     public octave = 4;
     public inputBox = '';
@@ -20,7 +28,7 @@ export class HomePage {
     public frontEndOctave = 1;
     public seq;
     constructor() {
-        this.buttons = ['Eminem: Without Me', 'Guns N Roses: Paradise City', 'X-Files', 'Abba: Mamma Mia', 'Barbie girl'];
+        this.buttons = ['Eminem: Without Me', 'Guns N Roses: Paradise City', 'X-Files', 'Abba: Mamma Mia', 'Barbie girl', 'Michael Jackson: Beat it'];
     }
 
     public songs = {
@@ -43,7 +51,12 @@ export class HomePage {
       barbie : {
             notes : '8#g2 8e2 8#g2 8#c3 4a2 4- 8#f2 8#d2 8#f2 8b2 4#g2 8#f2 8e2 4- 8e2 8#c2 4#f2 4#c2 4- 8#f2 8e2 4#g2 4#f2',
             tempo : 125
-      }
+      },
+
+        beat : {
+            notes : '8e1 4g1 4b1 4g2 4e2 4- 4e2 8#f2 4e2 4d2 4- 8d2 4- 8e1 4g1 4b1 4g2 4e2 4- 4e2 8#f2 4e2 4d2',
+            tempo : 225
+        }
     };
 
 
@@ -309,6 +322,7 @@ export class HomePage {
         }, notesArray);
         this.seq.start();
         this.seq.loop = 0;
+        tone.Transport.bpm.rampTo(this.value);
         tone.Transport.start('+0.1');
     }
 
@@ -326,6 +340,7 @@ export class HomePage {
                     if (button.toLowerCase().includes(value)) {
                         tone.Transport.bpm.rampTo(this.songs[value].tempo);
                         this.inputBox = this.songs[value].notes;
+                        this.value = this.songs[value].tempo;
                     }
             }
         document.getElementById('play').click();

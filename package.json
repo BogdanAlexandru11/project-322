@@ -26,9 +26,10 @@
     "@ionic/angular": "4.0.0-beta.16",
     "core-js": "^2.5.3",
     "ng2-nouislider": "^1.7.13",
+    "ng5-slider": "^1.1.7",
     "node-sass": "^4.10.0",
     "nouislider": "^12.1.0",
-    "rxjs": "6.3.3",
+    "rxjs": "^6.3.3",
     "tone": "^0.12.80",
     "zone.js": "^0.8.26"
   },

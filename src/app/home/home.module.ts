@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { Ng5SliderModule } from 'ng5-slider';
+
 
 import { HomePage } from './home.page';
 
@@ -11,6 +13,8 @@ import { HomePage } from './home.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    Ng5SliderModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: '',
