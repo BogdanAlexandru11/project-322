@@ -1,7 +1,11 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild, Directive} from '@angular/core';
 import * as tone from 'tone';
 import { Options } from 'ng5-slider';
+// import { IonicPage, NavController } from 'ionic-angular/index';
 import { FormControl } from '@angular/forms';
+
+
+
 // @ViewChild('play') play;
 
 
@@ -10,6 +14,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage {
     // public value = 100;
     // sliderControl: FormControl = new FormControl(100);
@@ -28,7 +33,7 @@ export class HomePage {
     public frontEndOctave = 1;
     public seq;
     constructor() {
-        this.buttons = ['Eminem: Without Me', 'Guns N Roses: Paradise City', 'X-Files', 'Abba: Mamma Mia', 'Barbie girl', 'Michael Jackson: Beat it'];
+        this.buttons = ['Eminem: Without Me', 'Guns N Roses: Paradise City', 'X-Files', 'Abba: Mamma Mia', 'Barbie girl', 'Michael Jackson: Beat it', 'Aerosmith: I Don\'t Wanna Miss A Thing', 'Beatles: Happy Together', 'Metallica: Harvester of Sorrow', 'Pulp Fiction'];
     }
 
     public songs = {
@@ -56,7 +61,24 @@ export class HomePage {
         beat : {
             notes : '8e1 4g1 4b1 4g2 4e2 4- 4e2 8#f2 4e2 4d2 4- 8d2 4- 8e1 4g1 4b1 4g2 4e2 4- 4e2 8#f2 4e2 4d2',
             tempo : 225
-        }
+        },
+        aerosmith : {
+            notes : '2- 16a1 16- 16a1 16- 8a1 16- 4a2 16g2 16- 2g2 16- 4- 8- 16g2 16- 16g2 16- 16g2 8g2 16- 4c2 16#a1 16- 4a2 8g2 4f2 4g2 8d2 8f2 16- 16f2 16- 16c2 8c2 16- 4a2 8g2 16f2 16- 8f2 16- 16c2 16- 4g2 4f2',
+            tempo : 125
+        },
+        happy : {
+            notes : '16c2 4c2 16d2 4#d2 16d2 2#d2 16d2 2#d2 4g2 4f2 16#d2 4d2 16c2 4d2 16c2 2d2 16c2 4#a1 16c2 2d2 16f2 4#d2 16d2 4c2 16#a1 4c2 16#a1 2c2 16#a1 4#g1 16#a1 4c2 4c2 16c2 4c2 16d2 8d2 8c2 4b1 1g2 4c2 4g2 4e2 4c2 4#a1 16d2 4f2 4a2 16#a2 4a2',
+            tempo : 125
+        },
+        harvester : {
+            notes : '16g1 16#f1 16e1 16b1 16#a1 16#g1 16g1 16f1 4e1 4- 8e1 8b1 8f2 8e2 16e1 16b1 8g2 8f2 8e2 8e1 8b1 8f2 8d2 16g1 16a1 8d2 8f1 8d2',
+            tempo : 150
+        },
+        fiction : {
+            notes : '16f1 16f1 16f1 16f1 16f1 16f1 16f1 16f1 16a1 16a1 16a1 16a1 16#a1 16#a1 16#a1 16#a1 16c2 16c2 16c2 16c2 16c2 16c2 16c2 16f1 16e2 16e2 16e2 16e2 16#c2 16#c2 16#c2 16#c2 16c2 16c2 16c2 16c2 16c2 16c2 16c2 16c2 16c2 16c2 16c2 16c2 16c2 16c2 16c2 16c2 16c2 16c2',
+            tempo : 113
+}
+
     };
 
 
@@ -64,7 +86,7 @@ export class HomePage {
         const buttonsSynth = new tone.Synth({
             frequency: 100,
             envelope: {
-                attack: 0.01,
+                attack: 0.1,
                 decay: 0.1,
                 release: 0.01
             },
@@ -276,6 +298,7 @@ export class HomePage {
 
     play() {
         // const synth = new tone.Synth().toMaster();
+        document.getElementById('stop').click();
 
         const synth = new tone.Synth({
             frequency:  200,
