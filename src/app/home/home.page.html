@@ -53,7 +53,7 @@
   <table>
     <tbody>
     <tr>
-      <td><button type="button" (click)="buttonClicked(1)">1<br>c</button></td>
+      <td><button  ion-button color="light" (click)="buttonClicked(1)">1<br>c</button></td>
       <td><button type="button" (click)="buttonClicked(2)">2<br>d</button></td>
       <td><button type="button" (click)="buttonClicked(3)">3<br>e</button></td>
     </tr>
@@ -82,7 +82,38 @@
   </ul>
 
   <ng5-slider [(value)]="value" [options]="options"></ng5-slider>
+  <button ion-button class="listing-button-option" (click)="presentSortModal()">Trier</button>
 
 
 
+  <ion-grid>
+    <ion-row>
+      <ion-col >
+        <ion-button type="button" (click)="buttonClicked(1)">1<br>c</ion-button>
+        <ion-button type="button" (click)="buttonClicked(2)">2<br>d</ion-button>
+        <ion-button type="button" (click)="buttonClicked(3)">3<br>e</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col >
+        <ion-button type="button" (click)="buttonClicked(4)">4<br>f</ion-button>
+        <ion-button type="button" (click)="buttonClicked(5)">5<br>g</ion-button>
+        <ion-button type="button" (click)="buttonClicked(6)">6<br>a</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+    <ion-col >
+      <ion-button  type="button" (click)="buttonClicked(7)">7<br>b</ion-button >
+      <ion-button  type="button" (click)="buttonClicked(8)">8<br>-</ion-button >
+      <ion-button  type="button" (click)="buttonClicked(9)">9<br>+</ion-button >
+    </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col >
+      <ion-button  type="button" (click)="buttonClicked(10)">*<br>oct</ion-button >
+      <ion-button  type="button" (click)="buttonClicked(11)">0<br>rest</ion-button >
+      <ion-button  type="button" (click)="buttonClicked(12)">#<br>#</ion-button >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
