@@ -18,6 +18,31 @@ $font_2: VT323;
 $font_3: monospace;
 $font_4: Open Sans;
 
+div {
+  padding: 0;
+  margin: 0;
+}
+
+.keypad {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.block {
+  width: 33%;
+  border: 2px solid black;
+  color: white;
+  background-color: #3171e0;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+}
+
+.fullscreenDiv {
+  display: flex;
+  margin : auto;
+}
 //@extend-elements
 //original selectors
 //body, html
