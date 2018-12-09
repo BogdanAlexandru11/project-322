@@ -64,7 +64,7 @@ export class HomePage {
         const buttonsSynth = new tone.Synth({
             frequency: 100,
             envelope: {
-                attack: 0.01,
+                attack: 0.1,
                 decay: 0.1,
                 release: 0.01
             },
@@ -276,7 +276,7 @@ export class HomePage {
 
     play() {
         // const synth = new tone.Synth().toMaster();
-
+        document.getElementById('stop').click();
         const synth = new tone.Synth({
             frequency:  200,
             envelope: {

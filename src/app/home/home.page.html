@@ -1,134 +1,66 @@
+<!--<p>Octave: {{frontEndOctave}}</p>-->
 <ion-content>
-        <!--
-      <div class="nokia">
-        <div class="body"></div>
-        <div class="side"></div>
-        <div class="speaker">
-          <div class="speaker-holes"></div>
-        </div>
-        <div class="logo">
-          <p>NOKIA</p>
-        </div>
-        <div class="top"></div>
-        <div class="screen">
-          <div class="score">
-            <p>Octave: {{frontEndOctave}}</p>
-            <p class="display">{{inputBox}}</p>
-          </div>
-        </div>
-        <div class="buttons">
-          <button type="button" (click)="play()"  class="home"></button>
-          <button type="button" (click)="reset()" class="call"></button>
-          <div class="select">
-            <div class="arrow"></div>
-          </div>
-          <button type="button" (click)="buttonClicked(1)" class="keys n1" >1</button>
-          <button type="button" (click)="buttonClicked(2)" class="keys n2" >2</button>
-          <button type="button" (click)="buttonClicked(3)" class="keys n3" >3</button>
-          <button type="button" (click)="buttonClicked(4)" class="keys n4" >4</button>
-          <button type="button" (click)="buttonClicked(5)" class="keys n5" >5</button>
-          <button type="button" (click)="buttonClicked(6)" class="keys n6" >6</button>
-          <button type="button" (click)="buttonClicked(7)" class="keys n7" >7</button>
-          <button type="button" (click)="buttonClicked(8)" class="keys n8" >8</button>
-          <button type="button" (click)="buttonClicked(9)" class="keys n9" >9</button>
-          <button type="button" (click)="buttonClicked(10)" class="keys nStar" >*</button>
-          <button type="button" (click)="buttonClicked(11)" class="keys n0" >0</button>
-          <button type="button" (click)="buttonClicked(12)" class="keys nHash" >#</button>
-        </div>
-      </div>
-      <br>
-
-      <!-<form [formGroup]= test>-->
-        <!--<nouislider [min]="0" [max]="20" [step]="0.5" [formControl]="form1.controls.single"></nouislider>-->
-      <!--</form>-->
-    <!--
-      <td><button type="button" (click)="reset()">reset<br></button></td>
-      <td><button type="button" (click)="deleteLast()">deleteLast<br></button></td>
-      <td><button type="button" id='play' (click)="play()">play<br></button></td>
-      <td><button type="button" id='stop' (click)="stop()">stop<br></button></td>
-
-
-      <br>
-      <table>
-        <tbody>
-        <tr>
-          <td><button  ion-button color="light" (click)="buttonClicked(1)">1<br>c</button></td>
-          <td><button type="button" (click)="buttonClicked(2)">2<br>d</button></td>
-          <td><button type="button" (click)="buttonClicked(3)">3<br>e</button></td>
-        </tr>
-        <tr>
-          <td><button type="button" (click)="buttonClicked(4)">4<br>f</button></td>
-          <td><button type="button" (click)="buttonClicked(5)">5<br>g</button></td>
-          <td><button type="button" (click)="buttonClicked(6)">6<br>a</button></td>
-        </tr>
-        <tr>
-          <td><button type="button" (click)="buttonClicked(7)">7<br>b</button></td>
-          <td><button type="button" (click)="buttonClicked(8)">8<br>-</button></td>
-          <td><button type="button" (click)="buttonClicked(9)">9<br>+</button></td>
-        </tr>
-        <tr>
-          <td><button type="button" (click)="buttonClicked(10)">*<br>oct</button></td>
-          <td><button type="button" (click)="buttonClicked(11)">0<br>rest</button></td>
-          <td><button type="button" (click)="buttonClicked(12)">#<br>#</button></td>
-        </tr>
-        </tbody>
-      </table>
-
-
-      <ul>
-        <button *ngFor="let button of buttons; let i = index;" (click)="songsList($event,button)">
-          {{ button }}
-        </button>
-      </ul>
-
-      <ng5-slider [(value)]="value" [options]="options"></ng5-slider>
-      <button ion-button class="listing-button-option" (click)="presentSortModal()">Trier</button>
-    -->
-     <div class='fullscreenDiv'>
-      <ion-grid text-center>
-      <td><p>current octave: {{frontEndOctave}}</p></td>
-      <p>{{inputBox}}</p>
-        <div id="keypad">
+    <div class="display">
         <ion-row>
-          <ion-col>
-            <div class="horizontal">
-            <ion-button type="button" (click)="play()">play</ion-button>
-            <ion-button type="button" (click)="stop()">stop</ion-button>
-            <ion-button type="button" (click)="reset()">reset</ion-button>
-            <ion-button type="button" (click)="deleteLast()">Delete Last</ion-button>
-            </div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-         <ion-col>
-            <ion-button type="button" class="block" (click)="buttonClicked(1)">1<br>c</ion-button>
-            <ion-button type="button" class="block" (click)="buttonClicked(2)">2<br>d</ion-button>
-            <ion-button type="button" class="block" (click)="buttonClicked(3)">3<br>e</ion-button>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col >
-            <ion-button type="button" class="block" (click)="buttonClicked(4)">4<br>f</ion-button>
-            <ion-button type="button" class="block" (click)="buttonClicked(5)">5<br>g</ion-button>
-            <ion-button type="button" class="block" (click)="buttonClicked(6)">6<br>a</ion-button>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-        <ion-col >
-          <ion-button  type="button" class="block" (click)="buttonClicked(7)">7<br>b</ion-button >
-          <ion-button  type="button" class="block" (click)="buttonClicked(8)">8<br>-</ion-button >
-          <ion-button  type="button" class="block" (click)="buttonClicked(9)">9<br>+</ion-button >
+        <ion-col col-10>
+            {{inputBox}}
         </ion-col>
+            <ion-col>
+                <ion-list>
+
+                    <ion-list>
+                        <ion-item *ngFor="let button of buttons; let i = index;" (click)="songsList($event,button)">
+                        {{ button }}
+                        </ion-item>
+                    </ion-list>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </div>
+    <ion-grid class="Control-btn">
+        <ion-row align-items-center>
+            <ion-col>
+                <ion-button class="controlBTN" expand="full" color="success"  id='play' (click)="play()">PLAY</ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button class="controlBTN" expand="full" color="success"  id='stop' (click)="stop()">STOP</ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button class="controlBTN" expand="full" color="success" (click)="reset()">RESET</ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button class="controlBTN" expand="full" color="success" (click)="deleteLast()">DELETE LAST</ion-button>
+            </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
-          <ion-button  type="button" class="block" (click)="buttonClicked(10)">*<br>oct</ion-button >
-          <ion-button  type="button" class="block" (click)="buttonClicked(11)">0<br>rest</ion-button >
-          <ion-button  type="button" class="block" (click)="buttonClicked(12)">#<br>#</ion-button >
-          </ion-col>
         </ion-row>
+    </ion-grid>
+    <br>
+    <div class="dialPad">
+        <div class="keys-btn">
+            <div class="clearfix">
+                <ng5-slider [(value)]="value" [options]="options"></ng5-slider>
+            </div>
+            <div class="clearfix">
+                <button class="calc_int" (click)="buttonClicked(1)" value="1">1<br>c</button>
+                <button class="calc_int" (click)="buttonClicked(2)" value="2">2<br>d</button>
+                <button class="calc_int" (click)="buttonClicked(3)" value="3">3<br>e</button>
+            </div>
+            <div class="clearfix">
+                <button class="calc_int" (click)="buttonClicked(4)" value="4">4<br>f</button>
+                <button class="calc_int" (click)="buttonClicked(5)" value="5">5<br>g</button>
+                <button class="calc_int" (click)="buttonClicked(6)" value="6">6<br>a</button>
+            </div>
+            <div class="clearfix">
+                <button class="calc_int" (click)="buttonClicked(7)" value="7">7<br>b</button>
+                <button class="calc_int" (click)="buttonClicked(8)" value="8">8<br>-</button>
+                <button class="calc_int" (click)="buttonClicked(9)" value="9">9<br>+</button>
+            </div>
+            <div class="clearfix">
+                <button class="calc_int imp" (click)="buttonClicked(10)" value="*">*<br>oct</button>
+                <button class="calc_int imp" (click)="buttonClicked(11)" value="0">0<br>rest</button>
+                <button class="calc_int imp" (click)="buttonClicked(12)" value="#">#</button>
+            </div>
         </div>
-      </ion-grid>
-     </div>
+    </div>
 </ion-content>
-
