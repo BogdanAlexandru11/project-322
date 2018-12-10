@@ -260,6 +260,15 @@ export class HomePage {
             }
         }
     }
+    save() {
+        const len = this.buttons.length - 5;
+        this.buttons.push('Song' + len);
+        this.songs.push('Song' + len);
+
+        this.inputBox = this.songs[value].notes;
+        this.value = this.songs[value].tempo;
+
+    }
 
     reset() {
         this.inputBox = '';

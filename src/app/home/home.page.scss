@@ -3,6 +3,17 @@
   border-style: solid;
   border-color: gray;
   margin: 7px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: "Lucida Console", Monaco, monospace;
+}
+
+.heading {
+font-size: 30px;
+  font-weight: bold;
+  position: center;
 }
 .dialPad{
   bottom: 0;
