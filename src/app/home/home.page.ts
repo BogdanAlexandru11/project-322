@@ -13,7 +13,7 @@ import { FormControl } from '@angular/forms';
 export class HomePage {
     // public value = 100;
     // sliderControl: FormControl = new FormControl(100);
-    public value = 100;
+    public value = 150;
     options: Options = {
         floor: 0,
         ceil: 300
@@ -28,7 +28,7 @@ export class HomePage {
     public frontEndOctave = 1;
     public seq;
     constructor() {
-        this.buttons = ['Eminem: Without Me', 'Guns N Roses: Paradise City', 'X-Files', 'Abba: Mamma Mia', 'Barbie girl', 'Michael Jackson: Beat it'];
+        this.buttons = ['Eminem: Without Me', 'Guns N Roses: Paradise City', 'Abba: Mamma Mia', 'Aqua - Barbie girl', 'Michael Jackson: Beat it', 'Match of The Day', 'X-Files'];
     }
 
     public songs = {
@@ -56,6 +56,10 @@ export class HomePage {
         beat : {
             notes : '8e1 4g1 4b1 4g2 4e2 4- 4e2 8#f2 4e2 4d2 4- 8d2 4- 8e1 4g1 4b1 4g2 4e2 4- 4e2 8#f2 4e2 4d2',
             tempo : 225
+        },
+        match : {
+            notes : '8c1 8f1 8a1 8.c2 16a1 8a1 8a1 8a1 4a1 8#a1 8.c2 16a1 8g1 8a1 8#a1 8c1 8e1 8g1 8.#a1 16g1 8g1 8g1 8g1 4g1 8a1 8.#a1 16g1 8f1 8g1 8a1 8c1 8f1 8a1 8.c2 16a1 8a1 8a1 8a1 4a1 8#a1 8.c2 16a1 8#a1 8c2 4d2 8d2 8e2 8f2 16f2 8e2 16e2 8d2 8f2 8c2 8c2 8d2 8c2 16#a1 8a1 16a1 8g1 4f1',
+            tempo : 100
         }
     };
 
@@ -263,10 +267,10 @@ export class HomePage {
     save() {
         const len = this.buttons.length - 5;
         this.buttons.push('Song' + len);
-        this.songs.push('Song' + len);
+        // this.songs.push('Song' + len);
 
-        this.inputBox = this.songs[value].notes;
-        this.value = this.songs[value].tempo;
+        this.inputBox = this.songs[this.value].notes;
+        this.value = this.songs[this.value].tempo;
 
     }
 
