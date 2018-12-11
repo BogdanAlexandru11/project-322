@@ -16,7 +16,7 @@ export class HomePage {
     public value = 150;
     options: Options = {
         floor: 0,
-        ceil: 300
+        ceil: 400
     };
 
 
@@ -28,7 +28,9 @@ export class HomePage {
     public frontEndOctave = 1;
     public seq;
     constructor() {
-        this.buttons = ['Eminem: Without Me', 'Guns N Roses: Paradise City', 'Abba: Mamma Mia', 'Aqua - Barbie girl', 'Michael Jackson: Beat it', 'Match of The Day', 'X-Files', 'Metallica: Harvester of Sorrow', 'Michael Jackson: Smooth criminal', 'Mission Impossible', 'Mr.President: Coco Jamboo', 'La Cucaracha', 'Beatles: Come Together'];
+        this.buttons = ['Eminem: Without Me', 'Guns N Roses: Paradise City', 'Aqua - Barbie girl', 'Michael Jackson: Beat it',
+            'Match of The Day', 'X-Files', 'Michael Jackson: Smooth criminal', 'Mission Impossible',
+            'Mr.President: Coco Jamboo', 'La Cucaracha', 'Simpsons Theme', 'Eye of the Tiger', 'Queen: We Are The Champions', ];
         this.buttons = this.buttons.sort();
     }
 
@@ -41,19 +43,15 @@ export class HomePage {
         },
         without : {
             notes : '8d2 8#a2 8a2 8g2 4d2 4- 8d2 8c2 8d2 8f2 8d2 8- 4- 8d2 8c2 8d2 8c2 8#a1 8- 4- 8#a1 8a1 8f1 4g1 4- 8- 8d2 8#a2 8a2 8g2 8d2 8- 4- 8d2 8c2 8d2 8f2 4d2 4- 8d2 8c2 8d2 8c2 8#a1 8- 4- 8#a1 8a1 8f1 8g1',
-            tempo : 112
+            tempo : 150
       },
       files : {
           notes : '4e1 4b1 4a1 4b1 4d2 2b1 1- 4e1 4b1 4a1 4b1 4e2 2b1 1- 4g2 4#f2 4e2 4d2 4e2 2b1 1- 4g2 4#f2 4e2 4d2 4#f2 2b1 1- 4e1 4b1 4a1 4b1 4d2 2b1 1- 4e1 4b1 4a1 4b1 4e2 2b1 1- 4e2 2b1',
           tempo : 125
       },
-      mamma : {
-            notes : '32f2 32#d2 32f2 8#d2 32#d2 32#d2 32f2 32g2 32f2 16.#d2 32- 16f2 8#d2 16#g2 32#g2 32#g2 32#g2 16g2 16.#d2 32- 8#a2 32#a2 32#a2 16#a2 16f2 16g2 8#g2 16g2 16g2 32g2 16g2 16d2 16#d2 8f2 16f2 8#d2 16#g2 32#g2 32#g2 32#g2 32g2 32#d2 32f2 16#d2',
-          tempo : 125
-      },
       barbie : {
             notes : '8#g2 8e2 8#g2 8#c3 4a2 4- 8#f2 8#d2 8#f2 8b2 4#g2 8#f2 8e2 4- 8e2 8#c2 4#f2 4#c2 4- 8#f2 8e2 4#g2 4#f2',
-            tempo : 125
+            tempo : 190
       },
 
         beat : {
@@ -62,11 +60,7 @@ export class HomePage {
         },
         match : {
             notes : '8c1 8f1 8a1 8.c2 16a1 8a1 8a1 8a1 4a1 8#a1 8.c2 16a1 8g1 8a1 8#a1 8c1 8e1 8g1 8.#a1 16g1 8g1 8g1 8g1 4g1 8a1 8.#a1 16g1 8f1 8g1 8a1 8c1 8f1 8a1 8.c2 16a1 8a1 8a1 8a1 4a1 8#a1 8.c2 16a1 8#a1 8c2 4d2 8d2 8e2 8f2 16f2 8e2 16e2 8d2 8f2 8c2 8c2 8d2 8c2 16#a1 8a1 16a1 8g1 4f1',
-            tempo : 100
-        },
-        sorrow : {
-            notes : '16g1 16#f1 16e1 16b1 16#a1 16#g1 16g1 16f1 4e1 4- 8e1 8b1 8f2 8e2 16e1 16b1 8g2 8f2 8e2 8e1 8b1 8f2 8d2 16g1 16a1 8d2 8f1 8d2',
-            temp : 150
+            tempo : 130
         },
         smooth : {
             notes : ' 8a1 16a1 16a1 16g1 16a1 8b1 8b1 8- 16a1 16b1 8c2 8c2 8- 16b1 16c2 8b1 4g1 8a1 8- 8a1 16a1 16a1 16g1 16a1 8b1 8b1 8- 16a1 16b1 8c2 8c2 8- 16b1 16c2 8b1 4g1',
@@ -74,7 +68,7 @@ export class HomePage {
         },
         mission : {
             notes : '16g2 8- 16g2 8- 16f2 16- 16#f2 16- 16g2 8- 16g2 8- 16#a2 16- 16c3 16- 16g2 8- 16g2 8- 16f2 16- 16#f2 16- 16g2 8- 16g2 8- 16#a2 16- 16c3 16- 16#a2 16g2 2d2 32- 16#a2 16g2 2#c2 32- 16#a2 16g2 2c2 16- 16#a1 16c2',
-            tempo : 100
+            tempo : 250
         },
         jamboo : {
             notes : '8g1 8c2 8g2 4g1 8c2 8g2 4#d2 8d2 8c2 8#g1 8c2 8#d2 4#g1 8#a1 8f2 4#d2 8d2 8c2 8g1 8c2 8g2 4g1 8c2 8g2 4#d2 8d2 8c2 8c2 8d2 8#d2 4c2 8f2',
@@ -88,9 +82,17 @@ export class HomePage {
             notes : '4c1 4c1 4c1 8f1 8a1 4- 4c1 4c1 4c1 8f1 8a1 4- 4f1 4f1 4e1 4e1 4d1 4d1 8c1 4- 4- 4c1 4c1 4c1 8e1 8g1 4- 4c1 4c1 4c1 8e1 8g1 4- 4c2 4d2 4c2 4#a1 4a1 4g1 8f1',
             tempo : 225
         },
-        beatles : {
-            notes : '4f1 4f1 8#a1 8c2 2#g2 2f2 4f1 4f1 8#a1 8c2 2#g2 2f2 4f1 4f1 8#a1 8c2 2#g2 2f2 4#g2 8#g2 4#g2 4#g2 4f2 4#d2 2f2 4#g2 8#g2 4#g2 4#g2 4f2 4#d2 2f2 2#g2 4#g2 4#g2 4f2 4#d2 2f2 2#g2 4f2 4#g2 4f2 4#d2 2f2 2g2 1g2 2g2 4f2 1g2 4#g2',
-            tempo : 113
+        simpsons : {
+            notes: '4c2 4e2 4#f2 8a2 4.g2 4e2 4c2 8a1 8#f1 8#f1 8#f1 2g1 4- 8#f1 8#f1 8#f1 8g1 4#a1 8c2 8c2 8c2 4c2',
+            tempo: 190
+        },
+        tiger: {
+            notes: '8d1 8e1 8f1 8- 8f1 16f1 8f1 16- 8e1 8d1 8c1 8c1 8d1 8e1 8d1 8- 8d1 8e1 8f1 16- 32- 8e1 8f1 8g1 16- 32- 8f1 16- 32a1 8- 16- 2a1 4- 8d1 16c1 8d1 16- 8c1',
+            tempo: 200
+        },
+        champions: {
+            notes: '2d2 8#c2 8d2 4#c2 4a1 8#f1 4b1 2#f1 8a1 2d2 8e2 8#f2 4a2 4#f2 16b1 2b1 4b1 4a1 8b1 4a1 4g1 4g2 4#f2 8g2 4#f2 4e2 4#f2 4d2 8g2 4#f2 4d2 8g2 4f2 4d2 8g2 4f2 2d2 8c2 8a1 ',
+            tempo: 100
         }
 
     };
