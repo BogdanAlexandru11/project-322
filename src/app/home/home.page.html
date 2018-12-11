@@ -9,10 +9,10 @@
                     {{inputBox}}
                 </ion-col>
                 <ion-col>
-                    <div style="overflow-x: hidden; overflow-y: scroll; height:90%;">
+                    <div style="overflow-y: scroll; height : 50%;">
                     <ion-list>
-                        <ion-list>
-                        <ion-item *ngFor="let button of buttons; let i = index;" (click)="songsList($event,button)">
+                        <ion-list style="overflow-x : hidden;">
+                        <ion-item *ngFor="let button of buttons; let i = index;" (click)="songsList($event,button)" class="itemclass">
                             {{ button }}
                         </ion-item>
                         </ion-list>
@@ -23,9 +23,6 @@
             </div>
     <ion-grid class="Control-btn">
         <ion-row align-items-center>
-            <ion-col>
-                <ion-button class="controlBTN" expand="full" color="success"  id='save' (click)="save()">SAVE</ion-button>
-            </ion-col>
             <ion-col>
                 <ion-button class="controlBTN" expand="full" color="success"  id='play' (click)="play()">PLAY</ion-button>
             </ion-col>
