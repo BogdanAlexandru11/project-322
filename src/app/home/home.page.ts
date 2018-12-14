@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import * as tone from 'tone';
 import { Options } from 'ng5-slider';
 import { FormControl } from '@angular/forms';
@@ -6,9 +6,9 @@ import { FormControl } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+    selector: 'app-home',
+    templateUrl: 'home.page.html',
+    styleUrls: ['home.page.scss'],
 })
 export class HomePage {
     // public value = 100;
@@ -18,6 +18,7 @@ export class HomePage {
         floor: 0,
         ceil: 400
     };
+    public bitcrusher;
     public duosynth;
     public distortion;
     public chorus;
@@ -31,59 +32,59 @@ export class HomePage {
     constructor() {
         this.buttons = ['Eminem: Without Me', 'Guns N Roses: Paradise City', 'Aqua - Barbie girl', 'Michael Jackson: Beat it',
             'Match of The Day', 'X-Files', 'Michael Jackson: Smooth criminal', 'Mission Impossible',
-            'Mr.President: Coco Jamboo', 'La Cucaracha', 'Simpsons Theme', 'Eye of the Tiger', 'Queen: We Are The Champions', ];
+            'Mr.President: Coco Jamboo', 'La Cucaracha', 'Simpsons Theme', 'Eye of the Tiger', 'Queen: We Are The Champions',];
         this.buttons = this.buttons.sort();
     }
 
 
 
     public songs = {
-        paradise : {
+        paradise: {
             notes: '8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1 8d1 4c1 4#c1 8d1 4c1 4#c1 4d1 4c1 4d1 4c1 4d1 8f1',
             tempo: 225
         },
-        without : {
-            notes : '8d2 8#a2 8a2 8g2 4d2 4- 8d2 8c2 8d2 8f2 8d2 8- 4- 8d2 8c2 8d2 8c2 8#a1 8- 4- 8#a1 8a1 8f1 4g1 4- 8- 8d2 8#a2 8a2 8g2 8d2 8- 4- 8d2 8c2 8d2 8f2 4d2 4- 8d2 8c2 8d2 8c2 8#a1 8- 4- 8#a1 8a1 8f1 8g1',
-            tempo : 150
-      },
-      files : {
-          notes : '4e1 4b1 4a1 4b1 4d2 2b1 1- 4e1 4b1 4a1 4b1 4e2 2b1 1- 4g2 4#f2 4e2 4d2 4e2 2b1 1- 4g2 4#f2 4e2 4d2 4#f2 2b1 1- 4e1 4b1 4a1 4b1 4d2 2b1 1- 4e1 4b1 4a1 4b1 4e2 2b1 1- 4e2 2b1',
-          tempo : 125
-      },
-      barbie : {
-            notes : '8#g2 8e2 8#g2 8#c3 4a2 4- 8#f2 8#d2 8#f2 8b2 4#g2 8#f2 8e2 4- 8e2 8#c2 4#f2 4#c2 4- 8#f2 8e2 4#g2 4#f2',
-            tempo : 190
-      },
+        without: {
+            notes: '8d2 8#a2 8a2 8g2 4d2 4- 8d2 8c2 8d2 8f2 8d2 8- 4- 8d2 8c2 8d2 8c2 8#a1 8- 4- 8#a1 8a1 8f1 4g1 4- 8- 8d2 8#a2 8a2 8g2 8d2 8- 4- 8d2 8c2 8d2 8f2 4d2 4- 8d2 8c2 8d2 8c2 8#a1 8- 4- 8#a1 8a1 8f1 8g1',
+            tempo: 150
+        },
+        files: {
+            notes: '4e1 4b1 4a1 4b1 4d2 2b1 1- 4e1 4b1 4a1 4b1 4e2 2b1 1- 4g2 4#f2 4e2 4d2 4e2 2b1 1- 4g2 4#f2 4e2 4d2 4#f2 2b1 1- 4e1 4b1 4a1 4b1 4d2 2b1 1- 4e1 4b1 4a1 4b1 4e2 2b1 1- 4e2 2b1',
+            tempo: 125
+        },
+        barbie: {
+            notes: '8#g2 8e2 8#g2 8#c3 4a2 4- 8#f2 8#d2 8#f2 8b2 4#g2 8#f2 8e2 4- 8e2 8#c2 4#f2 4#c2 4- 8#f2 8e2 4#g2 4#f2',
+            tempo: 190
+        },
 
-        beat : {
-            notes : '8e1 4g1 4b1 4g2 4e2 4- 4e2 8#f2 4e2 4d2 4- 8d2 4- 8e1 4g1 4b1 4g2 4e2 4- 4e2 8#f2 4e2 4d2',
-            tempo : 225
+        beat: {
+            notes: '8e1 4g1 4b1 4g2 4e2 4- 4e2 8#f2 4e2 4d2 4- 8d2 4- 8e1 4g1 4b1 4g2 4e2 4- 4e2 8#f2 4e2 4d2',
+            tempo: 225
         },
-        match : {
-            notes : '8c1 8f1 8a1 8.c2 16a1 8a1 8a1 8a1 4a1 8#a1 8.c2 16a1 8g1 8a1 8#a1 8c1 8e1 8g1 8.#a1 16g1 8g1 8g1 8g1 4g1 8a1 8.#a1 16g1 8f1 8g1 8a1 8c1 8f1 8a1 8.c2 16a1 8a1 8a1 8a1 4a1 8#a1 8.c2 16a1 8#a1 8c2 4d2 8d2 8e2 8f2 16f2 8e2 16e2 8d2 8f2 8c2 8c2 8d2 8c2 16#a1 8a1 16a1 8g1 4f1',
-            tempo : 130
+        match: {
+            notes: '8c1 8f1 8a1 8.c2 16a1 8a1 8a1 8a1 4a1 8#a1 8.c2 16a1 8g1 8a1 8#a1 8c1 8e1 8g1 8.#a1 16g1 8g1 8g1 8g1 4g1 8a1 8.#a1 16g1 8f1 8g1 8a1 8c1 8f1 8a1 8.c2 16a1 8a1 8a1 8a1 4a1 8#a1 8.c2 16a1 8#a1 8c2 4d2 8d2 8e2 8f2 16f2 8e2 16e2 8d2 8f2 8c2 8c2 8d2 8c2 16#a1 8a1 16a1 8g1 4f1',
+            tempo: 130
         },
-        smooth : {
-            notes : ' 8a1 16a1 16a1 16g1 16a1 8b1 8b1 8- 16a1 16b1 8c2 8c2 8- 16b1 16c2 8b1 4g1 8a1 8- 8a1 16a1 16a1 16g1 16a1 8b1 8b1 8- 16a1 16b1 8c2 8c2 8- 16b1 16c2 8b1 4g1',
-            tempo : 125
+        smooth: {
+            notes: ' 8a1 16a1 16a1 16g1 16a1 8b1 8b1 8- 16a1 16b1 8c2 8c2 8- 16b1 16c2 8b1 4g1 8a1 8- 8a1 16a1 16a1 16g1 16a1 8b1 8b1 8- 16a1 16b1 8c2 8c2 8- 16b1 16c2 8b1 4g1',
+            tempo: 125
         },
-        mission : {
-            notes : '16g2 8- 16g2 8- 16f2 16- 16#f2 16- 16g2 8- 16g2 8- 16#a2 16- 16c3 16- 16g2 8- 16g2 8- 16f2 16- 16#f2 16- 16g2 8- 16g2 8- 16#a2 16- 16c3 16- 16#a2 16g2 2d2 32- 16#a2 16g2 2#c2 32- 16#a2 16g2 2c2 16- 16#a1 16c2',
-            tempo : 250
+        mission: {
+            notes: '16g2 8- 16g2 8- 16f2 16- 16#f2 16- 16g2 8- 16g2 8- 16#a2 16- 16c3 16- 16g2 8- 16g2 8- 16f2 16- 16#f2 16- 16g2 8- 16g2 8- 16#a2 16- 16c3 16- 16#a2 16g2 2d2 32- 16#a2 16g2 2#c2 32- 16#a2 16g2 2c2 16- 16#a1 16c2',
+            tempo: 250
         },
-        jamboo : {
-            notes : '8g1 8c2 8g2 4g1 8c2 8g2 4#d2 8d2 8c2 8#g1 8c2 8#d2 4#g1 8#a1 8f2 4#d2 8d2 8c2 8g1 8c2 8g2 4g1 8c2 8g2 4#d2 8d2 8c2 8c2 8d2 8#d2 4c2 8f2',
-            tempo : 225
+        jamboo: {
+            notes: '8g1 8c2 8g2 4g1 8c2 8g2 4#d2 8d2 8c2 8#g1 8c2 8#d2 4#g1 8#a1 8f2 4#d2 8d2 8c2 8g1 8c2 8g2 4g1 8c2 8g2 4#d2 8d2 8c2 8c2 8d2 8#d2 4c2 8f2',
+            tempo: 225
         },
-        adams : {
-            notes : '8#f1 16#f1 16#f1 16#f1 8b1 32#d2 8b1 32#g1 8e1 8#c2 32a1 8#a1 32#c2 8#a1 32#f1 8#d1 8b1 32#f1 8b1 32#d2 8b1 32#g1 8e1 8#c2 32b1 8#a1 32#f1 8#g1 32#a1 4b1 32#f1 8b1 32#d2 8b1 32#g1 8e1 8#c2 32a1 8#a1 32#c2 8#a1 32#f1 8#d1 8b1 32#f1 8b1 32#d2 8b1 32#g1 8e1',
-            tempo : 70
+        adams: {
+            notes: '8#f1 16#f1 16#f1 16#f1 8b1 32#d2 8b1 32#g1 8e1 8#c2 32a1 8#a1 32#c2 8#a1 32#f1 8#d1 8b1 32#f1 8b1 32#d2 8b1 32#g1 8e1 8#c2 32b1 8#a1 32#f1 8#g1 32#a1 4b1 32#f1 8b1 32#d2 8b1 32#g1 8e1 8#c2 32a1 8#a1 32#c2 8#a1 32#f1 8#d1 8b1 32#f1 8b1 32#d2 8b1 32#g1 8e1',
+            tempo: 70
         },
-        cucaracha : {
-            notes : '4c1 4c1 4c1 8f1 8a1 4- 4c1 4c1 4c1 8f1 8a1 4- 4f1 4f1 4e1 4e1 4d1 4d1 8c1 4- 4- 4c1 4c1 4c1 8e1 8g1 4- 4c1 4c1 4c1 8e1 8g1 4- 4c2 4d2 4c2 4#a1 4a1 4g1 8f1',
-            tempo : 225
+        cucaracha: {
+            notes: '4c1 4c1 4c1 8f1 8a1 4- 4c1 4c1 4c1 8f1 8a1 4- 4f1 4f1 4e1 4e1 4d1 4d1 8c1 4- 4- 4c1 4c1 4c1 8e1 8g1 4- 4c1 4c1 4c1 8e1 8g1 4- 4c2 4d2 4c2 4#a1 4a1 4g1 8f1',
+            tempo: 225
         },
-        simpsons : {
+        simpsons: {
             notes: '4c2 4e2 4#f2 8a2 4.g2 4e2 4c2 8a1 8#f1 8#f1 8#f1 2g1 4- 8#f1 8#f1 8#f1 8g1 4#a1 8c2 8c2 8c2 4c2',
             tempo: 190
         },
@@ -132,11 +133,11 @@ export class HomePage {
             this.inputBox = this.inputBox + '4g' + this.frontEndOctave + ' ';
         }
         if (6 === num) {
-            buttonsSynth.triggerAttackRelease('F'  + this.octave, '4n');
+            buttonsSynth.triggerAttackRelease('F' + this.octave, '4n');
             this.inputBox = this.inputBox + '4a' + this.frontEndOctave + ' ';
         }
         if (7 === num) {
-            buttonsSynth.triggerAttackRelease('B'  + this.octave, '4n');
+            buttonsSynth.triggerAttackRelease('B' + this.octave, '4n');
             this.inputBox = this.inputBox + '4b' + this.frontEndOctave + ' ';
         }
         if (8 === num) {
@@ -148,7 +149,7 @@ export class HomePage {
                     this.duration = parseInt(myString.substr(0, match.index), 10);
                     this.duration = this.duration * 2;
                     if (this.duration > 32) {
-                       this.duration = 32;
+                        this.duration = 32;
                     }
                     if (myString.match(/#/)) {
                         this.inputBox = this.inputBox.substr(0, myIndex) + ' ' + this.duration + '#' + myString.substr(match.index) + ' ';
@@ -239,7 +240,7 @@ export class HomePage {
                 this.frontEndOctave = 1;
             }
             this.octave = this.octave + 1;
-            if (this.octave > 6 ) {
+            if (this.octave > 6) {
                 this.octave = 4;
             }
         }
@@ -249,31 +250,31 @@ export class HomePage {
 
         if (12 === num) {
             if (this.inputBox.length <= 6) {
-                    if (this.inputBox.match(/.*#.*$/)) {
-                        this.hashtagPresent = true;
-                    }
-                    if (this.hashtagPresent === false) {
-                        const myString = this.inputBox.substr(0, this.inputBox.length - 1);
-                        const match = /[a-zA-Z]/.exec(myString);
-                        if (match) {
-                            this.duration = parseInt(this.inputBox.substr(0, this.inputBox.length - 1).substr(0, match.index), 10);
-                            this.inputBox = this.inputBox.substr(0, match.index) + '#' + this.inputBox.substring(match.index);
-                            buttonsSynth.triggerAttackRelease(myString.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
-                        }
-                    } else {
-                        const myString = this.inputBox.substr(0, this.inputBox.length - 1);
-                        const match = /[a-zA-Z]/.exec(myString);
-                        const matchHashtag = /#/.exec(myString);
-                        if (match) {
-                            if (matchHashtag) {
-                                this.duration = parseInt(this.inputBox.substr(0, this.inputBox.length - 1).substr(0, match.index), 10);
-                                this.inputBox = this.duration + myString.substring(0, matchHashtag.index - 1) + myString.substring(matchHashtag.index + 1) + ' ';
-                                buttonsSynth.triggerAttackRelease(myString.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
-                                this.hashtagPresent = false;
-                            }
-                        }
+                if (this.inputBox.match(/.*#.*$/)) {
+                    this.hashtagPresent = true;
+                }
+                if (this.hashtagPresent === false) {
+                    const myString = this.inputBox.substr(0, this.inputBox.length - 1);
+                    const match = /[a-zA-Z]/.exec(myString);
+                    if (match) {
+                        this.duration = parseInt(this.inputBox.substr(0, this.inputBox.length - 1).substr(0, match.index), 10);
+                        this.inputBox = this.inputBox.substr(0, match.index) + '#' + this.inputBox.substring(match.index);
+                        buttonsSynth.triggerAttackRelease(myString.substring(match.index, match.index + 1) + '#' + this.octave, this.duration + 'n');
                     }
                 } else {
+                    const myString = this.inputBox.substr(0, this.inputBox.length - 1);
+                    const match = /[a-zA-Z]/.exec(myString);
+                    const matchHashtag = /#/.exec(myString);
+                    if (match) {
+                        if (matchHashtag) {
+                            this.duration = parseInt(this.inputBox.substr(0, this.inputBox.length - 1).substr(0, match.index), 10);
+                            this.inputBox = this.duration + myString.substring(0, matchHashtag.index - 1) + myString.substring(matchHashtag.index + 1) + ' ';
+                            buttonsSynth.triggerAttackRelease(myString.substring(match.index, match.index + 1) + this.octave, this.duration + 'n');
+                            this.hashtagPresent = false;
+                        }
+                    }
+                }
+            } else {
                 const myIndex = this.inputBox.substr(0, this.inputBox.length - 1).lastIndexOf(' ');
                 const lastInstructions = this.inputBox.substr(myIndex).trim();
                 const match = /[a-zA-Z]/.exec(lastInstructions);
@@ -317,53 +318,56 @@ export class HomePage {
         if (this.inputBox.length <= 6) {
             this.inputBox = '';
         } else {
-                this.inputBox = this.inputBox.substr(0, myIndex) + ' ';
-            }
+            this.inputBox = this.inputBox.substr(0, myIndex) + ' ';
         }
+    }
 
     play() {
-        let counter=0;
+        let counter = 0;
         document.getElementById('stop').click();
         let synth;
-        if(this.chorus===true){
+        if (this.chorus === true) {
             const chorus = new tone.Chorus(4, 2.5, 0.5);
             synth = new tone.PolySynth(4, tone.MonoSynth).connect(chorus).toMaster();
         }
-        else if(this.distortion===true){
+        else if (this.distortion === true) {
             const phaser = new tone.Phaser({
-                "frequency" : 15,
-                "octaves" : 5,
-                "baseFrequency" : 1000
+                "frequency": 15,
+                "octaves": 5,
+                "baseFrequency": 1000
             }).toMaster();
             synth = new tone.FMSynth().connect(phaser);
 
         }
-        else if(this.duosynth===true){
+        else if (this.duosynth === true) {
             const reverb = new tone.JCReverb(0.4).connect(tone.Master);
             const delay = new tone.FeedbackDelay(0.5);
             //connecting the synth to reverb through delay
             synth = new tone.DuoSynth().chain(delay, reverb);
         }
-        
+        else if (this.bitcrusher === true) {
+            const crusher = new tone.BitCrusher(4).toMaster();
+            synth = new tone.MonoSynth().connect(crusher);
+        }
         else {
             console.log("got in else");
             synth = new tone.Synth({
-            oscillator  : {
-                type  : 'triangle' ,
-                detune  : 1 ,
-                phase  : 3
-                },  
-            // frequency: 100,
-            envelope: {
-                attackCurve  : 'linear' ,
-                releaseCurve  : 'step'
-            }
-            // harmonicity: 1.0,
-            // modulationIndex: 10
-        }).toMaster();
+                oscillator: {
+                    type: 'triangle',
+                    detune: 1,
+                    phase: 3
+                },
+                // frequency: 100,
+                envelope: {
+                    attackCurve: 'linear',
+                    releaseCurve: 'step'
+                }
+                // harmonicity: 1.0,
+                // modulationIndex: 10
+            }).toMaster();
         }
         const notesArray = this.inputBox.split(' ');
-        this.seq = new tone.Sequence(function(time, note) {
+        this.seq = new tone.Sequence(function (time, note) {
             console.log(note);
             let noteLength;
             let noteValue;
@@ -372,7 +376,7 @@ export class HomePage {
             const matchPause = /-/.exec(note);
             let octaveValue;
             if (match) {
-                counter=counter+1;
+                counter = counter + 1;
                 // console.log(notesArray[notesArray.length-1]);
                 octaveValue = parseInt(note.substring(match.index + 1), 10);
                 if (octaveValue === 1) {
@@ -400,7 +404,7 @@ export class HomePage {
             }
         }, notesArray);
 
-        var loop = new tone.Loop(function(time){
+        var loop = new tone.Loop(function (time) {
             //triggered every eighth note. 
             console.log(time);
         }, notesArray).start(0);
@@ -411,7 +415,7 @@ export class HomePage {
     }
 
     stop() {
-        if(this.seq){
+        if (this.seq) {
             this.seq = this.seq.dispose();
         }
         tone.Transport.stop();
@@ -422,13 +426,13 @@ export class HomePage {
     songsList(event, button) {
         document.getElementById('stop').click();
         this.inputBox = '';
-            for (const value of Object.keys(this.songs)) {
-                    if (button.toLowerCase().includes(value)) {
-                        tone.Transport.bpm.rampTo(this.songs[value].tempo);
-                        this.inputBox = this.songs[value].notes;
-                        this.value = this.songs[value].tempo+50;
-                    }
+        for (const value of Object.keys(this.songs)) {
+            if (button.toLowerCase().includes(value)) {
+                tone.Transport.bpm.rampTo(this.songs[value].tempo);
+                this.inputBox = this.songs[value].notes;
+                this.value = this.songs[value].tempo + 50;
             }
+        }
         document.getElementById('play').click();
     }
 }
