@@ -324,9 +324,10 @@ export class HomePage {
     play() {
         let counter=0;
         document.getElementById('stop').click();
+        let synth;
         if(this.chorus===true){
             const chorus = new tone.Chorus(4, 2.5, 0.5);
-            const synth = new tone.PolySynth(4, tone.MonoSynth).connect(chorus).toMaster();
+            synth = new tone.PolySynth(4, tone.MonoSynth).connect(chorus).toMaster();
         }
         else if(this.distortion===true){
             const phaser = new tone.Phaser({
@@ -334,19 +335,19 @@ export class HomePage {
                 "octaves" : 5,
                 "baseFrequency" : 1000
             }).toMaster();
-            const synth = new tone.FMSynth().connect(phaser);
+            synth = new tone.FMSynth().connect(phaser);
 
         }
         else if(this.duosynth===true){
             const reverb = new tone.JCReverb(0.4).connect(tone.Master);
             const delay = new tone.FeedbackDelay(0.5);
             //connecting the synth to reverb through delay
-            const synth = new tone.DuoSynth().chain(delay, reverb);
+            synth = new tone.DuoSynth().chain(delay, reverb);
         }
         
         else {
             console.log("got in else");
-        const synth = new tone.Synth({
+            synth = new tone.Synth({
             oscillator  : {
                 type  : 'triangle' ,
                 detune  : 1 ,
