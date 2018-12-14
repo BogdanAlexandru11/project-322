@@ -18,8 +18,9 @@ export class HomePage {
         floor: 0,
         ceil: 400
     };
-
-
+    public duosynth;
+    public distortion;
+    public chorus;
     public buttons: Array<string>;
     public octave = 4;
     public inputBox = '';
@@ -299,13 +300,12 @@ export class HomePage {
         }
     }
     save() {
-        const len = this.buttons.length - 5;
-        this.buttons.push('Song' + len);
-        // this.songs.push('Song' + len);
-
-        this.inputBox = this.songs[this.value].notes;
-        this.value = this.songs[this.value].tempo;
-
+        const chorus = new tone.Chorus(4, 2.5, 0.5);
+        const synth = new tone.PolySynth(4, tone.MonoSynth).connect(chorus).toMaster();
+        // synth.triggerAttackRelease(["C3","E3","G3"], "8n");
+        // tone.Transport.start();
+        // const buttonsSynth = new tone.Synth({}).toMaster();
+        synth.triggerAttackRelease('C' + 4, '4n');
     }
 
     reset() {
@@ -322,22 +322,48 @@ export class HomePage {
         }
 
     play() {
-        // const synth = new tone.Synth().toMaster();
+        let counter=0;
         document.getElementById('stop').click();
-        const synth = new tone.Synth({
-            frequency:  200,
-            envelope: {
-                attack: 0.01,
-                decay: 0.1,
-                release: 0.01
-            },
-            harmonicity: 1.0,
-            modulationIndex: 10,
-            volume: -10
-        }).toMaster();
+        if(this.chorus===true){
+            const chorus = new tone.Chorus(4, 2.5, 0.5);
+            const synth = new tone.PolySynth(4, tone.MonoSynth).connect(chorus).toMaster();
+        }
+        else if(this.distortion===true){
+            const phaser = new tone.Phaser({
+                "frequency" : 15,
+                "octaves" : 5,
+                "baseFrequency" : 1000
+            }).toMaster();
+            const synth = new tone.FMSynth().connect(phaser);
 
+        }
+        else if(this.duosynth===true){
+            const reverb = new tone.JCReverb(0.4).connect(tone.Master);
+            const delay = new tone.FeedbackDelay(0.5);
+            //connecting the synth to reverb through delay
+            const synth = new tone.DuoSynth().chain(delay, reverb);
+        }
+        
+        else {
+            console.log("got in else");
+        const synth = new tone.Synth({
+            oscillator  : {
+                type  : 'triangle' ,
+                detune  : 1 ,
+                phase  : 3
+                },  
+            // frequency: 100,
+            envelope: {
+                attackCurve  : 'linear' ,
+                releaseCurve  : 'step'
+            }
+            // harmonicity: 1.0,
+            // modulationIndex: 10
+        }).toMaster();
+        }
         const notesArray = this.inputBox.split(' ');
         this.seq = new tone.Sequence(function(time, note) {
+            console.log(note);
             let noteLength;
             let noteValue;
             const match = /[a-zA-Z]/.exec(note);
@@ -345,6 +371,8 @@ export class HomePage {
             const matchPause = /-/.exec(note);
             let octaveValue;
             if (match) {
+                counter=counter+1;
+                // console.log(notesArray[notesArray.length-1]);
                 octaveValue = parseInt(note.substring(match.index + 1), 10);
                 if (octaveValue === 1) {
                     note = note.substring(0, match.index + 1) + 4;
@@ -358,7 +386,10 @@ export class HomePage {
                 if (matchHashTag) {
                     noteValue = noteValue.substring(0, 1) + '#' + noteValue.substring(1);
                 }
+                console.log(noteValue + " " + noteLength);
+                // synth.triggerAttack(noteValue, noteLength);
                 synth.triggerAttackRelease(noteValue, noteLength + 'n');
+                // console.log(counter);
             }
             if (matchPause) {
                 noteLength = parseInt(note.substr(0, matchPause.index), 10);
@@ -367,14 +398,21 @@ export class HomePage {
                 // synth.triggerRelease('', noteLength + 'n');
             }
         }, notesArray);
+
+        var loop = new tone.Loop(function(time){
+            //triggered every eighth note. 
+            console.log(time);
+        }, notesArray).start(0);
         this.seq.start();
         this.seq.loop = 0;
         tone.Transport.bpm.rampTo(this.value);
-        tone.Transport.start('+0.1');
+        tone.Transport.start();
     }
 
     stop() {
-        this.seq = this.seq.dispose();
+        if(this.seq){
+            this.seq = this.seq.dispose();
+        }
         tone.Transport.stop();
     }
 
@@ -387,7 +425,7 @@ export class HomePage {
                     if (button.toLowerCase().includes(value)) {
                         tone.Transport.bpm.rampTo(this.songs[value].tempo);
                         this.inputBox = this.songs[value].notes;
-                        this.value = this.songs[value].tempo;
+                        this.value = this.songs[value].tempo+50;
                     }
             }
         document.getElementById('play').click();
