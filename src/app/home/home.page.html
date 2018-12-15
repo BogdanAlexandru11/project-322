@@ -1,31 +1,38 @@
 <!--<p>Octave: {{frontEndOctave}}</p>-->
 <ion-content>
     <div class="display">
-        <ion-row class="heading">
-            <ion-col>
-                Current Octave: {{frontEndOctave}}
-            </ion-col>
-            <ion-col class="heading2">
-                Songs
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col col-10>
-                {{inputBox}}
-            </ion-col>
-            <ion-col>
-                <div style="overflow-y: scroll; height : 40%;">
-                    <ion-list>
-                        <ion-list style="overflow-x : hidden;">
-                            <ion-item *ngFor="let button of buttons; let i = index;" (click)="songsList($event,button)"
-                                class="itemclass">
-                                {{ button }}
-                            </ion-item>
-                        </ion-list>
-                    </ion-list>
+        <div class="slider" id="slider">
+            <div class="holder">
+                <div class="slide" id="slide-0"><span class="temp">
+                    <ion-row class="heading">
+                        <ion-col>
+                            Current Octave: {{frontEndOctave}}
+                        </ion-col>
+                        <ion-col class="heading2">
+                            Songs
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-10>
+                            {{inputBox}}
+                        </ion-col>
+                        <ion-col>
+                            <div style="overflow-y: scroll; height : 40%;">
+                                <ion-list>
+                                    <ion-list style="overflow-x : hidden;">
+                                        <ion-item *ngFor="let button of buttons; let i = index;" (click)="songsList($event,button)"
+                                            class="itemclass">
+                                            {{ button }}
+                                        </ion-item>
+                                    </ion-list>
+                                </ion-list>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </span>
                 </div>
-            </ion-col>
-        </ion-row>
+            </div>
+        </div>
     </div>
     <ion-grid class="Control-btn">
         <ion-row align-items-center>

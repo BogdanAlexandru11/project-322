@@ -3,7 +3,7 @@ import * as tone from 'tone';
 import { Options } from 'ng5-slider';
 import { FormControl } from '@angular/forms';
 import { TestBed } from '@angular/core/testing';
-import {bufferToWav} from 'audiobuffer-to-wav';
+//import {bufferToWav} from 'audiobuffer-to-wav';
 import * as xhr from 'xhr';
 // @ViewChild('play') play;
 
