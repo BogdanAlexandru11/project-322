@@ -1,44 +1,40 @@
+<!--<p>Octave: {{frontEndOctave}}</p>-->
 <ion-content>
     <div class="display">
-        <ion-row class="heading">
-            <ion-col>
-                Current Octave: {{frontEndOctave}}
-            </ion-col>
-            <ion-col class="heading2">
-                Songs
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col col-10>
-                {{inputBox}}
-            </ion-col>
-            <ion-col>
-                <div style="overflow-y: scroll; height : 50%;">
-                    <ion-list>
-                        <ion-list style="overflow-x : hidden;">
-                            <ion-item *ngFor="let button of buttons; let i = index;" (click)="songsList($event,button)"
-                                      class="itemclass">
-                                {{ button }}
-                            </ion-item>
-                        </ion-list>
-                    </ion-list>
+        <div class="slider" id="slider">
+            <div class="holder">
+                <div class="slide" id="slide-0"><span class="temp">
+                    <ion-row class="heading">
+                        <ion-col>
+                            Current Octave: {{frontEndOctave}}
+                        </ion-col>
+                        <ion-col class="heading2">
+                            Songs
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-10>
+                            {{inputBox}}
+                        </ion-col>
+                        <ion-col>
+                            <div style="overflow-y: scroll; height : 40%;" >
+                                <ion-list>
+                                    <ion-list style="overflow-x : hidden;">
+                                        <ion-item *ngFor="let button of buttons; let i = index;" (click)="songsList($event,button)" class="itemclass" style="font-size: 20px;font-weight: bold;">
+                                            {{ button }}
+                                        </ion-item>
+                                    </ion-list>
+                                </ion-list>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </span>
                 </div>
-            </ion-col>
-        </ion-row>
+            </div>
+        </div>
     </div>
     <ion-grid class="Control-btn">
         <ion-row align-items-center>
-            <ion-col>
-                <ion-item>
-                    <ion-label>Effects</ion-label>
-                    <ion-select value="brown" ok-text="Okay" cancel-text="Dismiss">
-                        <ion-select-option [(ngModel)]="chorus">Chorus</ion-select-option>
-                        <ion-select-option [(ngModel)]="distortion">Distortion</ion-select-option>
-                        <ion-select-option [(ngModel)]="duosynth">Duosynth</ion-select-option>
-                        <ion-select-option [(ngModel)]="bitcrusher">Bitcrusher</ion-select-option>
-                    </ion-select>
-                </ion-item>
-            </ion-col>
             <ion-col>
                 <ion-button class="controlBTN" expand="full" color="success" id='play' (click)="play()">PLAY</ion-button>
             </ion-col>
@@ -55,15 +51,24 @@
                 <ion-button class="controlBTN" expand="full" color="success" (click)="save()">SAVE</ion-button>
             </ion-col>
         </ion-row>
-        <ion-row>
-            <ng5-slider [(value)]="value" [options]="options"></ng5-slider>
-        </ion-row>
-        <ion-row>
+
+        <ion-item>
+            <ion-label style="color: white">Effects</ion-label>
+            <ion-select  style="color: white" [(ngModel)]="effectName" interface="action-sheet">
+                <ion-select-option value="chorus">Chorus</ion-select-option>
+                <ion-select-option value="distortion">Distortion</ion-select-option>
+                <ion-select-option value="duosynth">Duo Synth</ion-select-option>
+                <ion-select-option value="bitcrusher">Bit Crusher</ion-select-option>
+                <ion-select-option value="noeffect">No Effect</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-row style="background-color: #404257;">
+            <ng5-slider  [(value)]="value" [options]="options"></ng5-slider>
         </ion-row>
     </ion-grid>
-    <br>
-    <div class="dialPad">
-        <div class="keys-btn" style="height : 50%;">
+    <div class="dialPad" style="background-color: #404257;">
+        <div class="keys-btn" style="height : 50%; background-color: #404257;">
 
             <div class="clearfix">
                 <button class="calc_int" (click)="buttonClicked(1)" value="1">c</button>
