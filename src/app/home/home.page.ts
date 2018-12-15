@@ -3,6 +3,8 @@ import * as tone from 'tone';
 import { Options } from 'ng5-slider';
 import { FormControl } from '@angular/forms';
 import { TestBed } from '@angular/core/testing';
+import {bufferToWav} from 'audiobuffer-to-wav';
+import * as xhr from 'xhr';
 // @ViewChild('play') play;
 
 
@@ -19,6 +21,9 @@ export class HomePage {
         floor: 0,
         ceil: 400
     };
+    public effectName: any;
+    public test123;
+    public audioContext = new AudioContext();
     public bitcrusher;
     public duosynth;
     public distortion;
@@ -421,11 +426,11 @@ export class HomePage {
         let counter = 0;
         document.getElementById('stop').click();
         let synth;
-        if (this.chorus === true) {
+        if (this.effectName === 'chorus') {
             const chorus = new tone.Chorus(4, 2.5, 0.5);
             synth = new tone.PolySynth(4, tone.MonoSynth).connect(chorus).toMaster();
         }
-        else if (this.distortion === true) {
+        else if (this.effectName === 'distortion') {
             const phaser = new tone.Phaser({
                 "frequency": 15,
                 "octaves": 5,
@@ -434,13 +439,13 @@ export class HomePage {
             synth = new tone.FMSynth().connect(phaser);
 
         }
-        else if (this.duosynth === true) {
+        else if (this.effectName === 'duosynth') {
             const reverb = new tone.JCReverb(0.4).connect(tone.Master);
             const delay = new tone.FeedbackDelay(0.5);
             //connecting the synth to reverb through delay
             synth = new tone.DuoSynth().chain(delay, reverb);
         }
-        else if (this.bitcrusher === true) {
+        else if (this.effectName === 'bitcrusher') {
             const crusher = new tone.BitCrusher(4).toMaster();
             synth = new tone.MonoSynth().connect(crusher);
         }
@@ -566,7 +571,4 @@ export class HomePage {
         //     }
         // }
     }
-        // document.getElementById('play').click();
-    }
-
-
+}

@@ -14,7 +14,7 @@
                 {{inputBox}}
             </ion-col>
             <ion-col>
-                <div style="overflow-y: scroll; height : 50%;">
+                <div style="overflow-y: scroll; height : 40%;">
                     <ion-list>
                         <ion-list style="overflow-x : hidden;">
                             <ion-item *ngFor="let button of buttons; let i = index;" (click)="songsList($event,button)"
@@ -45,24 +45,19 @@
                 <ion-button class="controlBTN" expand="full" color="success" (click)="save()">SAVE</ion-button>
             </ion-col>
         </ion-row>
-        <ion-row>
-            <ion-item>
-                <ion-label>chorus</ion-label>
-                <ion-checkbox [(ngModel)]="chorus"></ion-checkbox>
-            </ion-item>
-            <ion-item>
-                <ion-label>distortion</ion-label>
-                <ion-checkbox [(ngModel)]="distortion"></ion-checkbox>
-            </ion-item>
-            <ion-item>
-                <ion-label>duosynth</ion-label>
-                <ion-checkbox [(ngModel)]="duosynth"></ion-checkbox>
-            </ion-item>
 
-            <ion-item>
-                <ion-label>bitcrusher</ion-label>
-                <ion-checkbox [(ngModel)]="bitcrusher"></ion-checkbox>
-            </ion-item>
+                <ion-item>
+                        <ion-label>Hair Color</ion-label>
+                        <ion-select  [(ngModel)]="effectName" interface="action-sheet">
+                          <ion-select-option value="chorus">Chorus</ion-select-option>
+                          <ion-select-option value="distortion">Distortion</ion-select-option>
+                          <ion-select-option value="duosynth">Duo Synth</ion-select-option>
+                          <ion-select-option value="bitcrusher">Bit Crusher</ion-select-option>
+                          <ion-select-option value="noeffect">No Effect</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+
+        <ion-row>
             <ng5-slider [(value)]="value" [options]="options"></ng5-slider>
 
         </ion-row>
