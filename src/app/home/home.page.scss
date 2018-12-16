@@ -46,6 +46,7 @@
 .dialPad{
   bottom: 0;
   position: fixed;
+  height: 47%;
   width: 100%;
   background-color: #404257;
 }
@@ -72,7 +73,7 @@
   background:linear-gradient(#BCBBC0, #BCBBC0);
 }
 .clearfix {
-  margin: 0 10px;
+  margin: 7% 10px;
 }
 .dialPad .keys-btn .clearfix button:last-child{
   margin-right:0;
