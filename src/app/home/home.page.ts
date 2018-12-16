@@ -469,5 +469,6 @@ export class HomePage {
                 document.getElementById('play').click();
             }
         }
+
     }
 }
