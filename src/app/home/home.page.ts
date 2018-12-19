@@ -1,9 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import * as tone from 'tone';
 import { Options } from 'ng5-slider';
-import { FormControl } from '@angular/forms';
-import { TestBed } from '@angular/core/testing';
-//import {bufferToWav} from 'audiobuffer-to-wav';
 
 // @ViewChild('play') play;
 
@@ -14,8 +11,6 @@ import { TestBed } from '@angular/core/testing';
     styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-    // public value = 100;
-    // sliderControl: FormControl = new FormControl(100);
     public value = 150;
     options: Options = {
         floor: 0,
@@ -38,9 +33,10 @@ export class HomePage {
     public songs;
     public counter = 1;
     constructor() {
+        this.value = 150;
         this.buttons = ['Eminem: Without Me', 'Guns N Roses: Paradise City', 'Aqua - Barbie girl', 'Michael Jackson: Beat it',
             'Match of The Day', 'X-Files', 'Michael Jackson: Smooth criminal', 'Mission Impossible',
-            'Mr.President: Coco Jamboo', 'La Cucaracha', 'Simpsons Theme', 'Eye of the Tiger', 'Queen: We Are The Champions',];
+            'Mr.President: Coco Jamboo', 'La Cucaracha', 'Simpsons Theme', 'Eye of the Tiger', 'Queen: We Are The Champions'];
         this.buttons = this.buttons.sort();
         this.songs = [
             {
