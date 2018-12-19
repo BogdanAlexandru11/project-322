@@ -1,37 +1,35 @@
-<!--<p>Octave: {{frontEndOctave}}</p>-->
 <ion-content>
     <div class="display">
-        <div class="slider" id="slider">
-            <div class="holder">
-                <div class="slide" id="slide-0"><span class="temp">
-                    <ion-row class="heading">
-                        <ion-col>
+        <ion-slides>
+            <ion-slide>
+                <ion-grid style="width:90%;">
+                    <ion-row>
+                        <div class="heading">
                             Current Octave: {{frontEndOctave}}
-                        </ion-col>
-                        <ion-col class="heading2">
-                            Songs
-                        </ion-col>
+                        </div>
                     </ion-row>
                     <ion-row>
-                        <ion-col col-10>
-                            {{inputBox}}
-                        </ion-col>
-                        <ion-col>
-                            <div style="overflow-y: scroll; height : 40%;" >
-                                <ion-list>
-                                    <ion-list style="overflow-x : hidden;">
-                                        <ion-item *ngFor="let button of buttons; let i = index;" (click)="songsList($event,button)" class="itemclass" style="font-size: 20px;font-weight: bold;">
-                                            {{ button }}
-                                        </ion-item>
-                                    </ion-list>
-                                </ion-list>
-                            </div>
-                        </ion-col>
+                        {{inputBox}}
                     </ion-row>
-                </span>
-                </div>
-            </div>
-        </div>
+                </ion-grid>
+            </ion-slide>
+            <ion-slide>
+                <ion-grid style="width : 90%;">
+                    <div class="heading">
+                        Songs
+                    </div>
+                    <ion-row>
+                        <div scrollx="true" id="myFixZone">
+                            <ion-list>
+                                <ion-item *ngFor="let button of buttons; let i = index;" (click)="songsList($event,button)" class="itemclass" style="font-size: 20px;font-weight: bold;">
+                                    {{ button }}
+                                </ion-item>
+                            </ion-list>
+                        </div>
+                    </ion-row>
+                </ion-grid>
+            </ion-slide>
+        </ion-slides>
     </div>
     <ion-grid class="Control-btn">
         <ion-row align-items-center>
